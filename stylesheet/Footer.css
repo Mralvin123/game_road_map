@@ -1,0 +1,24 @@
+.footer-content {
+    background-color: #20232a;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    display: inline-flex;
+    gap: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #61dafb;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: white;
+}
