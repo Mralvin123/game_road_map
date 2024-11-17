@@ -1,0 +1,123 @@
+body {
+    background-color: #171717; /* Fondo de la página */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrar verticalmente */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado entre campos */
+    padding: 2em; /* Espaciado interno */
+    background-color: #252525; /* Fondo del formulario */
+    border-radius: 20px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Sombra del formulario */
+    width: 500px; /* Ancho del formulario */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1em; /* Margen inferior */
+    color: #fff; /* Color del texto */
+    font-size: 1.5em; /* Tamaño de fuente */
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    padding: 0.6em;
+    border-radius: 10px;
+    background-color: #333; /* Fondo de los campos */
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.5em; /* Espaciado interno */
+    color: #d3d3d3; /* Color del texto */
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+}
+
+.input-field::placeholder {
+    color: #d3d3d3; /* Color del placeholder */
+}
+
+/* Estilos de los botones */
+.btn {
+    display: flex;
+    justify-content: space-between; /* Espacio entre botones */
+}
+
+.button1, .button2 {
+    padding: 0.5em 1em; /* Espaciado interno */
+    border-radius: 5px;
+    border: none;
+    background-color: #444; /* Fondo de los botones */
+    color: white; /* Color del texto de los botones */
+    transition: background-color 0.4s ease-in-out; /* Transición de color */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+.button1:hover, .button2:hover {
+    background-color: #555; /* Color en hover */
+}
+.button3 {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #555;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.button3:hover {
+    background-color: #333;
+}
+/* Estilos para la ventana modal */
+.modal {
+    display: none; /* Oculta la ventana por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+}
+
+.modal-content button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Media Queries */
+@media (max-width: 500px) {
+    .form {
+        width: 90%; /* Ancho del formulario en pantallas pequeñas */
+    }
+}
+

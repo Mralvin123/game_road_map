@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php 
-    include "./includes/templeate/Header.php";
+    include "./includes/template/Header.php";
     ?>
 
     <main>
@@ -19,7 +19,7 @@
     </main>
 
     <?php 
-    include "./includes/templeate/Footer.php";
+    include "./includes/template/Footer.php";
     ?>
 </body>
 </html>
