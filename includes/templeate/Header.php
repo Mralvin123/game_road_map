@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portal Header</title>
     <link rel="stylesheet" href="../../stylesheet/Header.css">
 </head>
 <body>
 <header>
     <nav class="navbar">
-        <a href="index.php" class="logo">Roadmap</a>
+        <!-- Logo -->
+        <a href="../../index.php" class="logo">Roadmap</a>
+
+        <!-- Navigation Links -->
         <ul class="nav-links">
-            <li><a href="roadmaps.php">Roadmaps</a></li>
-            <li><a href="guides.php">Guides</a></li>
-            <li><a href="contact.php">Contact</a></li>
+            <li><a href="../../index.php">Inicio</a></li>
+            <li><a href="../../nosotros.php">Nosotros</a></li>
+            <li><a href="../../acerca.php">Acerca de</a></li>
+            <li><a href="../../productos.php">paquetes</a></li>
         </ul>
+
+        <!-- Authentication Buttons -->
         <div class="auth-buttons">
-            <a href="login.php" class="btn">Login</a>
-            <a href="signup.php" class="btn btn-primary">Sign Up</a>
+            <a href="../../admin/login/login.php" class="btn">Login</a>
+            <a href="../../admin/register/register.php" class="btn btn-primary">register</a>
         </div>
     </nav>
-</header 
+</header>
 </body>
 </html>
