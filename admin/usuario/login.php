@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $message = 'Por favor complete todos los campos.';
     } else {
         $db = conectarDB();
-        // Consulta SQL ajustada para la columna "pasword"
-        $sql = "SELECT id_usuario, pasword, estado, rol FROM usuario WHERE email = ? LIMIT 1"; // Aquí usamos "pasword"
+        // Consulta SQL para obtener los datos del usuario
+        $sql = "SELECT id, password, estado, rol FROM usuario WHERE email = ? LIMIT 1";
         $stmt = $db->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -28,20 +28,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_result($id_usuario, $password_db, $estado, $rol);
             $stmt->fetch();
 
-            // Verificar la contraseña con el hash almacenado en "pasword"
-            if (password_verify($password, $password_db)) {
-                if ($estado === 'activo') {
-                    $_SESSION['user_id'] = $id_usuario;
-                    $_SESSION['user_email'] = $email;
-                    $_SESSION['user_rol'] = $rol;
-                    $_SESSION['loggedin'] = true;  // Esto marca al usuario como logueado
-                    header("Location: index.php"); // Redirige a index.php
-                    exit();  // Evita que el código siga ejecutándose después de la redirección
-                } else {
-                    $message = 'Cuenta inactiva. Por favor, contacte al administrador.';
-                }
+            // Verificar si el hash de la base de datos es válido
+            if (!password_get_info($password_db)['algo']) {
+                $message = 'Error: Contraseña almacenada no válida. Contacte al administrador.';
             } else {
-                $message = 'Correo o contraseña incorrectos. Intente de nuevo.';
+                // Verificar la contraseña con el hash almacenado
+                if (password_verify($password, $password_db)) {
+                    if ($estado === 'activo') {
+                        // Configurar sesión
+                        $_SESSION['user_id'] = $id_usuario;
+                        $_SESSION['user_email'] = $email;
+                        $_SESSION['user_rol'] = $rol;
+                        $_SESSION['loggedin'] = true;  // Esto marca al usuario como logueado
+                        header("Location: index.php"); // Redirige a index.php
+                        exit();  // Evita que el código siga ejecutándose después de la redirección
+                    } else {
+                        $message = 'Cuenta inactiva. Por favor, contacte al administrador.';
+                    }
+                } else {
+                    $message = 'Correo o contraseña incorrectos. Intente de nuevo.';
+                }
             }
         } else {
             $message = 'Correo o contraseña incorrectos. Intente de nuevo.';
@@ -58,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../stylesheet/login.css">
     <title>Iniciar sesión</title>
 </head>
-<?php include "../../includes/template/Header.php";?>
+<?php include "../../includes/template/Header.php"; ?>
 <body>
     <div class="container">
         <form class="form" method="POST" action="login.php">
@@ -76,11 +82,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="btn">
-            <a href="register.php" class="button2">Registrarse</a>
-            <button type="submit" class="button1">Iniciar sesión</button>
+                <a href="register.php" class="button2">Registrarse</a>
+                <button type="submit" class="button1">Iniciar sesión</button>
             </div>
         </form>
     </div>
-    <?php include "../../includes/template/Footer.php";?>
+    <?php include "../../includes/template/Footer.php"; ?>
 </body>
 </html>

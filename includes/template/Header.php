@@ -19,8 +19,8 @@ $baseURL = "http://localhost/GAME_ROAD_MAP/";
         <!-- Navigation Links -->
         <ul class="nav-links">
             <li><a href="<?php echo $baseURL; ?>index.php">Inicio</a></li>
-            <li><a href="<?php echo $baseURL; ?>nosotros.php">Nosotros</a></li>
-            <li><a href="<?php echo $baseURL; ?>acerca.php">Acerca de</a></li>
+            <li><a href="<?php echo $baseURL; ?>contactanos.php">contactanos</a></li>
+            <li><a href="<?php echo $baseURL; ?>acercade.php">Acerca de</a></li>
             <li><a href="<?php echo $baseURL; ?>productos.php">paquetes</a></li>
             <li><a href="<?php echo $baseURL; ?>admin/index.php">Administrador</a></li>
         </ul>
