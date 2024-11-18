@@ -22,6 +22,7 @@ $baseURL = "http://localhost/GAME_ROAD_MAP/";
             <li><a href="<?php echo $baseURL; ?>nosotros.php">Nosotros</a></li>
             <li><a href="<?php echo $baseURL; ?>acerca.php">Acerca de</a></li>
             <li><a href="<?php echo $baseURL; ?>productos.php">paquetes</a></li>
+            <li><a href="<?php echo $baseURL; ?>admin/index.php">Administrador</a></li>
         </ul>
 
         <!-- Authentication Buttons -->

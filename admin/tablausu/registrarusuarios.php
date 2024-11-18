@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
    <!-- Formulario HTML para agregar un nuevo usuario -->
+   <h1>Registrar Usuario</h1>
 <form method="POST" action="">
     <label for="id">ID:</label>
     <input type="text" name="id" required><br>
