@@ -1,36 +1,51 @@
 <?php
-    include "../../includes/template/header.php";
-    
-    // Verificar si se han enviado los datos del formulario
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Verificar si las claves existen en el array $_POST
-        $id = isset($_POST['id']) ? $_POST['id'] : null;
-        $email = isset($_POST['email']) ? $_POST['email'] : null;
-        $password = isset($_POST['password']) ? $_POST['password'] : null;
-        $rol = isset($_POST['rol']) ? $_POST['rol'] : null;
-        $estado = isset($_POST['estado']) ? $_POST['estado'] : null;
-        $id_nivel_subs = isset($_POST['id_nivel_subs']) ? $_POST['id_nivel_subs'] : null;
+include "../../includes/template/header.php";
 
-        // Validar que todos los campos requeridos están presentes
-        if ($id && $email && $password && $rol && $estado && $id_nivel_subs) {
-            include "../../includes/config/database.php";
-            $db = conectarDB();
-            $consql = "INSERT INTO usuario (id, email, password, rol, estado, id_nivel_subs) VALUES ('$id', '$email', '$password', '$rol', '$estado', '$id_nivel_subs')";
-            $res = mysqli_query($db, $consql);
-            if ($res) {
-                echo "Registro Exitoso";
-            } else {
-                echo "Error al registrar: " . mysqli_error($db);
-            }
+// Verificar si se han enviado los datos del formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verificar si las claves existen en el array $_POST
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+    $email = isset($_POST['email']) ? $_POST['email'] : null;
+    $password = isset($_POST['password']) ? $_POST['password'] : null;
+    $rol = isset($_POST['rol']) ? $_POST['rol'] : null;
+    $estado = isset($_POST['estado']) ? $_POST['estado'] : null;
+    $id_nivel_subs = isset($_POST['id_nivel_subs']) ? $_POST['id_nivel_subs'] : null;
+
+    // Validar que todos los campos requeridos están presentes
+    if ($id && $email && $password && $rol && $estado && $id_nivel_subs) {
+        include "../../includes/config/database.php";
+        $db = conectarDB();
+
+        // Encriptar la contraseña
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
+        $consql = "INSERT INTO usuario (id, email, password, rol, estado, id_nivel_subs) 
+                   VALUES ('$id', '$email', '$passwordHash', '$rol', '$estado', '$id_nivel_subs')";
+        $res = mysqli_query($db, $consql);
+
+        if ($res) {
+            echo "<script>
+                    alert('Registro exitoso');
+                    window.location.href = 'listarusuarios.php';
+                  </script>";
         } else {
-            echo "Por favor, complete todos los campos.";
+            echo "Error al registrar: " . mysqli_error($db);
         }
+    } else {
+        echo "Por favor, complete todos los campos.";
     }
-
-
+}
 ?>
-
-<!-- Formulario HTML para agregar un nuevo usuario -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../stylesheet/registrar.css">
+    <title>Document</title>
+</head>
+<body>
+   <!-- Formulario HTML para agregar un nuevo usuario -->
 <form method="POST" action="">
     <label for="id">ID:</label>
     <input type="text" name="id" required><br>
@@ -52,4 +67,6 @@
 
     <input type="submit" value="Registrar Usuario">
 </form>
-<?php include "../../includes/template/Footer.php"; ?>
+<?php include "../../includes/template/Footer.php"; ?> 
+</body>
+</html>

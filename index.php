@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="stylesheet/Header.css">
     <link rel="stylesheet" href="stylesheet/Footer.css">
 </head>
+
 <body>
 
     <?php include "./includes/template/Header.php"; ?>
@@ -15,12 +17,11 @@
     <?php
     // Incluir la configuración de la base de datos para establecer la conexión con PDO
     include './includes/config/database.php';
-    include './includes/config/database2.php'; 
-    // La conexión a la base de datos debe estar definida en 'database.php'
+    include './includes/config/database2.php';
     ?>
-<a href="./admin/index.php">paquetes</a>
+
     <main>
-    <section class="intro">
+        <section class="intro">
             <div class="intro-content">
                 <h1>Roadmaps de Desarrollo de Videojuegos</h1>
                 <p>Descubre y sigue rutas de aprendizaje para convertirte en un experto en desarrollo de videojuegos.</p>
@@ -32,6 +33,7 @@
                         $stmt = $pdo->prepare($query);
                         $stmt->execute();
                         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todas las categorías
+
                         // Generamos los enlaces dinámicamente
                         foreach ($categories as $category) {
                             $categoryName = htmlspecialchars($category['categoria']); // Escapamos caracteres especiales
@@ -50,7 +52,7 @@
         // Realizamos la consulta a la base de datos
         try {
             // Esta consulta selecciona los datos necesarios de la tabla Ruta_de_estudio
-            $query = "SELECT categoria, titulo, descripcion FROM Ruta_de_estudio ORDER BY categoria";
+            $query = "SELECT id, categoria, titulo, descripcion FROM Ruta_de_estudio ORDER BY categoria";
             $stmt = $pdo->prepare($query);  // Usamos la conexión PDO para preparar la consulta
             $stmt->execute(); // Ejecutamos la consulta
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todos los resultados como un array asociativo
@@ -76,15 +78,16 @@
                 echo "<p>{$row['descripcion']}</p>"; // Mostramos la descripción de la categoría
                 echo "<div class='roadmap-subsection'><div class='roadmap-container'>"; // Iniciamos el contenedor de los elementos de esta categoría
             }
-            // Mostramos el ítem utilizando el título
-            echo "<div class='roadmap-item'>{$row['titulo']}</div>";
-        }
-        echo '</div></div></section>'; // Cerramos el último contenedor de la última categoría
-        ?>
-
+            // Mostramos el ítem utilizando el título como enlace
+            $routeId = htmlspecialchars($row['id']); // Escapamos el ID
+            $routeTitle = htmlspecialchars($row['titulo']); // Escapamos el título
+            echo "<div class='roadmap-item'><a href='GameRoutes/Route.php?id={$routeId}'>{$routeTitle}</a></div>";
+        } ?>
     </main>
 
+    <!-- Incluimos el pie de página -->
     <?php include "./includes/template/Footer.php"; ?>
 
 </body>
+
 </html>

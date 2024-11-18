@@ -14,7 +14,7 @@ $baseURL = "http://localhost/GAME_ROAD_MAP/";
 <header>
     <nav class="navbar">
         <!-- Logo -->
-        <a href="index.php" class="logo">Roadmap</a>
+        <a href="<?php echo $baseURL; ?>index.php" class="logo">GameRoadMap</a>
 
         <!-- Navigation Links -->
         <ul class="nav-links">
