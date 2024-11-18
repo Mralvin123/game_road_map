@@ -76,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="btn">
-                <button type="submit" class="button1">Iniciar sesión</button>
-                <a href="register.php" class="button2">Registrarse</a>
+            <a href="register.php" class="button2">Registrarse</a>
+            <button type="submit" class="button1">Iniciar sesión</button>
             </div>
         </form>
     </div>
