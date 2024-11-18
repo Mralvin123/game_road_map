@@ -4,75 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal - Roadmaps de Desarrollo de Videojuegos</title>
-    <!-- Vinculamos los archivos CSS -->
     <link rel="stylesheet" href="stylesheet/index.css">
     <link rel="stylesheet" href="stylesheet/Header.css">
     <link rel="stylesheet" href="stylesheet/Footer.css">
 </head>
 <body>
 
-    <!-- Incluimos el encabezado -->
     <?php include "./includes/template/Header.php"; ?>
 
-    <!-- Contenido principal -->
+    <?php
+    // Incluir la configuración de la base de datos para establecer la conexión con PDO
+    include './includes/config/database.php';
+    include './includes/config/database2.php'; 
+    // La conexión a la base de datos debe estar definida en 'database.php'
+    ?>
+<a href="./admin/index.php">paquetes</a>
     <main>
-        <!-- Introducción -->
-        <section class="intro">
+    <section class="intro">
             <div class="intro-content">
                 <h1>Roadmaps de Desarrollo de Videojuegos</h1>
-                <p>Descubre y sigue rutas de aprendizaje para convertirte en un experto en desarrollo de videojuegos. Ya sea en 2D o 3D, Unity, Godot, o Blender, ¡aquí encontrarás el camino hacia tu futuro como desarrollador de juegos!</p>
+                <p>Descubre y sigue rutas de aprendizaje para convertirte en un experto en desarrollo de videojuegos.</p>
                 <div class="buttons">
-                    <a href="#unity" class="btn btn-primary">Unity</a>
-                    <a href="#godot" class="btn btn-primary">Godot</a>
-                    <a href="#art" class="btn btn-primary">Arte 3D</a>
+                    <?php
+                    // Realizamos la consulta para obtener las categorías
+                    try {
+                        $query = "SELECT categoria FROM Ruta_de_estudio GROUP BY categoria";
+                        $stmt = $pdo->prepare($query);
+                        $stmt->execute();
+                        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todas las categorías
+                        // Generamos los enlaces dinámicamente
+                        foreach ($categories as $category) {
+                            $categoryName = htmlspecialchars($category['categoria']); // Escapamos caracteres especiales
+                            echo "<a href='#{$categoryName}' class='btn btn-primary'>{$categoryName}</a>";
+                        }
+                    } catch (PDOException $e) {
+                        echo "Error al realizar la consulta: " . $e->getMessage();
+                        die();
+                    }
+                    ?>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Unity -->
-        <section id="unity" class="roadmap">
-            <h2>Unity</h2>
-            <p>Aprende a desarrollar juegos en Unity, uno de los motores más poderosos para crear juegos en 2D y 3D.</p>
+        <?php
+        // Realizamos la consulta a la base de datos
+        try {
+            // Esta consulta selecciona los datos necesarios de la tabla Ruta_de_estudio
+            $query = "SELECT categoria, titulo, descripcion FROM Ruta_de_estudio ORDER BY categoria";
+            $stmt = $pdo->prepare($query);  // Usamos la conexión PDO para preparar la consulta
+            $stmt->execute(); // Ejecutamos la consulta
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todos los resultados como un array asociativo
+        } catch (PDOException $e) {
+            // Si ocurre algún error al ejecutar la consulta, lo mostramos
+            echo "Error al realizar la consulta: " . $e->getMessage();
+            die();
+        }
 
-            <!-- Sub-sección Unity 3D -->
-            <div class="roadmap-subsection">
-                <div class="roadmap-container">
-                    <div class="roadmap-item">Unity 3D</div>
-                    <div class="roadmap-item">Unity 2D</div>
-                    <div class="roadmap-item">Game Design in Unity</div>
-                    <div class="roadmap-item">UI Design in Unity</div>
-                </div>
-            </div>
-        <!-- Sección Godot -->
-        <section id="godot" class="roadmap">
-            <h2>Godot</h2>
-            <p>Explora el desarrollo de juegos con Godot, un motor open-source ideal tanto para proyectos en 2D como en 3D.</p>
+        // Variable para almacenar la categoría actual y evitar repetirla en la misma sección
+        $currentCategory = '';
 
-            <!-- Sub-sección Godot 3D -->
-            <div class="roadmap-subsection">
-                <div class="roadmap-container">
-                    <div class="roadmap-item">Godot 3D</div>
-                    <div class="roadmap-item">Godot 2D</div>
-                    <div class="roadmap-item">Game Design in Godot</div>
-                    <div class="roadmap-item">UI Design in Godot</div>
-                </div>
-            </div>
-        <!-- Sección Arte 3D -->
-        <section id="art" class="roadmap">
-            <h2>Arte 3D</h2>
-            <p>Aprende a crear arte para videojuegos con herramientas como Blender y MagicaVoxel.</p>
+        // Iteramos sobre los resultados obtenidos de la consulta
+        foreach ($result as $row) {
+            // Si la categoría ha cambiado, mostramos el encabezado de la nueva categoría
+            if ($currentCategory !== $row['categoria']) {
+                if ($currentCategory !== '') {
+                    echo '</div>'; // Cerramos el contenedor anterior
+                }
+                $currentCategory = $row['categoria']; // Actualizamos la categoría actual
+                echo "<section id='{$currentCategory}' class='roadmap'>"; // Creamos una nueva sección para esta categoría
+                echo "<h2>{$currentCategory}</h2>";
+                echo "<p>{$row['descripcion']}</p>"; // Mostramos la descripción de la categoría
+                echo "<div class='roadmap-subsection'><div class='roadmap-container'>"; // Iniciamos el contenedor de los elementos de esta categoría
+            }
+            // Mostramos el ítem utilizando el título
+            echo "<div class='roadmap-item'>{$row['titulo']}</div>";
+        }
+        echo '</div></div></section>'; // Cerramos el último contenedor de la última categoría
+        ?>
 
-            <!-- Sub-sección Blender -->
-            <div class="roadmap-subsection">
-                <div class="roadmap-container">
-                    <div class="roadmap-item">MagicaVoxel</div>
-                    <div class="roadmap-item">Blender</div>
-                </div>
-            </div>
-        </section>
     </main>
 
-    <!-- Incluimos el pie de página -->
     <?php include "./includes/template/Footer.php"; ?>
 
 </body>

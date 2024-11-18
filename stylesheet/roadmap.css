@@ -1,0 +1,32 @@
+.roadmap-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.step {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.step h3 {
+    margin: 0;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -20px;
+    width: 2px;
+    height: 20px;
+    background-color: #ccc;
+    transform: translateX(-50%);
+}
+
+.step:first-child::before {
+    display: none; /* Ocultar la lÃ­nea para el primer paso */
+}

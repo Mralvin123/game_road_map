@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['role'] === 'admin') {
-    header('Location: /cine2/index.php');
+if (!isset($_SESSION['loggedin']) || $_SESSION['rol'] === 'Administrador') {
+    header('Location: /GAME_ROAD_MAP/index.php');
     exit();
 }
 $inicio = false;
