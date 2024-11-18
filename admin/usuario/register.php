@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $message = 'La contraseña debe tener al menos 8 caracteres.';
                 } else {
                     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO usuario (email, password, rol, estado) VALUES (?, ?, ?, 'activo')";
+                    $sql = "INSERT INTO usuario (email, password, rol, estado) VALUES (?, ?, ?, 'activo', 1)";
                     $stmt = $db->prepare($sql);
                     $stmt->bind_param("sss", $email, $hashed_password, $role);
                     if ($stmt->execute()) {

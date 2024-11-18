@@ -3,12 +3,12 @@
     $db = conectarDB();
 
     // Validar si el parámetro 'id' está definido
-    if (!isset($_GET['id'])) {
-        die("Error: El parámetro 'id' no está definido.");
+    if (!isset($_GET['cod'])) {
+        die("Error: El parámetro 'cod' no está definido.");
     }
 
     // Escapar el valor del 'id' para evitar inyecciones SQL
-    $id = mysqli_real_escape_string($db, $_GET['id']);
+    $id = mysqli_real_escape_string($db, $_GET['cod']);
 
     // Consulta para obtener datos del usuario
     $query = "SELECT * FROM usuario WHERE id = '$id'";

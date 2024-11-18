@@ -2,7 +2,7 @@
     include "../../includes/config/database.php";
     $db = conectarDB();
 
-    $query = "SELECT * FROM usuario WHERE estado = 'activo'";
+    $query = "SELECT Usuario.id, Usuario.email, Usuario.password, Usuario.rol, Usuario.estado, Nivel_de_Subscripcion.nombre AS 'nivel_subs' FROM Usuario JOIN Nivel_de_Subscripcion ON Usuario.id_nivel_subs = Nivel_de_Subscripcion.id WHERE Usuario.estado = 'activo'";
     $resultado = mysqli_query($db, $query);
 ?>
 
@@ -16,6 +16,7 @@
 </head>
 <?php include "../../includes/template/header.php";?>
 <body>
+<a href="./registrarusuarios.php" class="boton boton-red"> Usuarios </a>
     <h1>Lista de Usuarios Activos</h1>
     <table class="table table-success table-striped">
         <thead>
@@ -25,7 +26,7 @@
                 <th>Password</th>
                 <th>Rol</th>
                 <th>Estado</th>
-                <th>ID Nivel Subscripción</th>
+                <th>Niveles de Subscripción</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -37,11 +38,11 @@
                     <td><?php echo $usuario['password']; ?></td>
                     <td><?php echo $usuario['rol']; ?></td>
                     <td><?php echo $usuario['estado']; ?></td>
-                    <td><?php echo $usuario['id_nivel_subs']; ?></td>
-                    <td>
-                        <a href="actualizar.php">motificar</a>
-                        <a href="eliminar.php">Eliminar</a>
-                    </td>
+                    <td><?php echo $usuario['nivel_subs']; ?></td>
+                    
+                    <?php echo "<td> <a href=eliminar.php?cod=".$usuario['id']." class='btn btn-danger'> ELIMINAR </a></td>";?>
+                    <?php echo "<td> <a href=actualizar.php?cod=".$usuario['id']." class='btn btn-success'> MODIFICAR </a></td>";?>
+                    
                 </tr>
             <?php endwhile; ?>
         </tbody>

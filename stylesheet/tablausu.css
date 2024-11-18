@@ -1,0 +1,105 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Encabezado */
+h1 {
+    text-align: center;
+    color: #333;
+    padding: 20px 0;
+    font-size: 2rem;
+}
+
+/* Contenedor */
+.container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* Estilo para la tabla */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #343a40;
+    color: white;
+    font-size: 1.2rem;
+}
+
+table td {
+    color: #333;
+}
+
+/* Estilos para las filas */
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* Estilos para los botones */
+.btn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table th, table td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}

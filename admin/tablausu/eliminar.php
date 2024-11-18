@@ -13,14 +13,13 @@
     $idv = mysqli_real_escape_string($db, $_GET['cod']);
 
     // Consulta para actualizar el estado
-    $consql = "UPDATE vendedores SET estado='Inactivo' WHERE idVendedores = '$idv'";
-    $res = mysqli_query($db, $consql);
-
+    $consql = "UPDATE usuario SET estado='Inactivo' WHERE id = '$idv'";
+    $res=mysqli_query($db, $consql);
     // Mostrar mensaje de éxito o error
     if ($res) {
         echo "<script>
                 alert('Se eliminó el registro correctamente.');
-                window.location.href = 'tablausu.php'; // Redirige a la lista de usuarios
+                window.location.href = 'listarusuarios.php'; // Redirige a la lista de usuarios
               </script>";
     } else {
         echo "<script>
