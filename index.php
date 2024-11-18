@@ -36,53 +36,13 @@
 
             <!-- Sub-sección Unity 3D -->
             <div class="roadmap-subsection">
-                <h3>Unity 3D</h3>
                 <div class="roadmap-container">
-                    <div class="roadmap-item">C#</div>
-                    <div class="roadmap-item">Unity Basics</div>
-                    <div class="roadmap-item">Physics & Collisions</div>
-                    <div class="roadmap-item">3D Graphics</div>
-                    <div class="roadmap-item">Animations</div>
-                    <div class="roadmap-item">AI and Pathfinding</div>
+                    <div class="roadmap-item">Unity 3D</div>
+                    <div class="roadmap-item">Unity 2D</div>
+                    <div class="roadmap-item">Game Design in Unity</div>
+                    <div class="roadmap-item">UI Design in Unity</div>
                 </div>
             </div>
-
-            <!-- Sub-sección Unity 2D -->
-            <div class="roadmap-subsection">
-                <h3>Unity 2D</h3>
-                <div class="roadmap-container">
-                    <div class="roadmap-item">Unity 2D Tools</div>
-                    <div class="roadmap-item">Sprites & Animations</div>
-                    <div class="roadmap-item">2D Physics</div>
-                    <div class="roadmap-item">Tilemaps</div>
-                    <div class="roadmap-item">Camera System</div>
-                    <div class="roadmap-item">UI Design</div>
-                </div>
-            </div>
-
-            <!-- Sub-sección Game Design en Unity -->
-            <div class="roadmap-subsection">
-                <h3>Game Design en Unity</h3>
-                <div class="roadmap-container">
-                    <div class="roadmap-item">Game Mechanics</div>
-                    <div class="roadmap-item">Level Design</div>
-                    <div class="roadmap-item">Prototyping</div>
-                    <div class="roadmap-item">Player Experience</div>
-                </div>
-            </div>
-
-            <!-- Sub-sección UI Design en Unity -->
-            <div class="roadmap-subsection">
-                <h3>UI Design en Unity</h3>
-                <div class="roadmap-container">
-                    <div class="roadmap-item">UI Layout</div>
-                    <div class="roadmap-item">Navigation</div>
-                    <div class="roadmap-item">Responsive Design</div>
-                    <div class="roadmap-item">Animation</div>
-                </div>
-            </div>
-        </section>
-
         <!-- Sección Godot -->
         <section id="godot" class="roadmap">
             <h2>Godot</h2>
@@ -90,53 +50,13 @@
 
             <!-- Sub-sección Godot 3D -->
             <div class="roadmap-subsection">
-                <h3>Godot 3D</h3>
                 <div class="roadmap-container">
-                    <div class="roadmap-item">GDScript</div>
-                    <div class="roadmap-item">3D Scenes</div>
-                    <div class="roadmap-item">Physics</div>
-                    <div class="roadmap-item">Lighting and Shadows</div>
-                    <div class="roadmap-item">3D Animation</div>
-                    <div class="roadmap-item">Multiplayer</div>
+                    <div class="roadmap-item">Godot 3D</div>
+                    <div class="roadmap-item">Godot 2D</div>
+                    <div class="roadmap-item">Game Design in Godot</div>
+                    <div class="roadmap-item">UI Design in Godot</div>
                 </div>
             </div>
-
-            <!-- Sub-sección Godot 2D -->
-            <div class="roadmap-subsection">
-                <h3>Godot 2D</h3>
-                <div class="roadmap-container">
-                    <div class="roadmap-item">2D Tools</div>
-                    <div class="roadmap-item">Tilemaps</div>
-                    <div class="roadmap-item">2D Physics</div>
-                    <div class="roadmap-item">Shaders</div>
-                    <div class="roadmap-item">Player Input</div>
-                    <div class="roadmap-item">UI and Menus</div>
-                </div>
-            </div>
-
-            <!-- Sub-sección Game Design en Godot -->
-            <div class="roadmap-subsection">
-                <h3>Game Design en Godot</h3>
-                <div class="roadmap-container">
-                    <div class="roadmap-item">Game Mechanics</div>
-                    <div class="roadmap-item">Level Design</div>
-                    <div class="roadmap-item">Prototyping</div>
-                    <div class="roadmap-item">Player Experience</div>
-                </div>
-            </div>
-
-            <!-- Sub-sección UI Design en Godot -->
-            <div class="roadmap-subsection">
-                <h3>UI Design en Godot</h3>
-                <div class="roadmap-container">
-                    <div class="roadmap-item">UI Layout</div>
-                    <div class="roadmap-item">Navigation</div>
-                    <div class="roadmap-item">Responsive Design</div>
-                    <div class="roadmap-item">Animation</div>
-                </div>
-            </div>
-        </section>
-
         <!-- Sección Arte 3D -->
         <section id="art" class="roadmap">
             <h2>Arte 3D</h2>
@@ -144,25 +64,9 @@
 
             <!-- Sub-sección Blender -->
             <div class="roadmap-subsection">
-                <h3>Blender</h3>
                 <div class="roadmap-container">
-                    <div class="roadmap-item">Modelado 3D</div>
-                    <div class="roadmap-item">Texturizado</div>
-                    <div class="roadmap-item">Rigging</div>
-                    <div class="roadmap-item">Animación 3D</div>
-                    <div class="roadmap-item">Sculpting</div>
-                    <div class="roadmap-item">Exportación a Unity</div>
-                </div>
-            </div>
-
-            <!-- Sub-sección MagicaVoxel -->
-            <div class="roadmap-subsection">
-                <h3>MagicaVoxel</h3>
-                <div class="roadmap-container">
-                    <div class="roadmap-item">Modelado Voxels</div>
-                    <div class="roadmap-item">Texturización</div>
-                    <div class="roadmap-item">Animaciones Voxels</div>
-                    <div class="roadmap-item">Exportación a Unity</div>
+                    <div class="roadmap-item">MagicaVoxel</div>
+                    <div class="roadmap-item">Blender</div>
                 </div>
             </div>
         </section>
