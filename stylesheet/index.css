@@ -1,0 +1,168 @@
+/* Restablecemos el margen y padding predeterminado */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilos para los encabezados */
+h1, h2, h3 {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Área principal */
+main {
+    padding: 3rem 4rem;
+}
+
+/* Estilos para la introducción */
+.intro {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.intro h1 {
+    font-size: 2.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.intro p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* Estilos para las secciones de roadmap */
+.roadmap {
+    margin-bottom: 4rem;
+}
+
+.roadmap h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Sub-sección del roadmap */
+.roadmap-subsection {
+    margin-top: 2rem;
+}
+
+.roadmap-subsection h3 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+/* Contenedor de los items */
+.roadmap-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+/* Estilos para cada ítem del roadmap */
+.roadmap-item {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 220px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.roadmap-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de enlaces en los ítems */
+.roadmap-item a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.roadmap-item a:hover {
+    color: #0056b3;
+}
+
+/* Media Queries para mejorar la responsividad */
+@media screen and (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+
+    .intro h1 {
+        font-size: 2rem;
+    }
+
+    .buttons .btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .roadmap-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .roadmap-item {
+        width: 80%;
+        max-width: 350px;
+        margin-bottom: 1.5rem;
+    }
+}

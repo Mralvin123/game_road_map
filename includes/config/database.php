@@ -1,5 +1,5 @@
 <?php
-function conectarDb() {
+function conectarDB() {
     $db = mysqli_connect('localhost', 'root', '', 'game_road');
 
     // Verificar si la conexión fue exitosa
