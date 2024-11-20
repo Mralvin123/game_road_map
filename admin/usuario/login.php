@@ -6,8 +6,8 @@ $email_error = '';
 $password_error = '';
 $message = '';
 
-if (isset($_SESSION['user_id'])) {
-    header("Location: ../../index.php"); // Redirigir si ya está logueado
+if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+    header("Location: ../index.php"); // Redirigir si ya está logueado
     exit();
 }
 
@@ -26,23 +26,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email_error) && empty($password_error)) {
         $db = conectarDB();
 
-        // Verificar si el usuario existe
-        $sql = "SELECT id, password FROM usuario WHERE email = ? AND estado = 'activo' LIMIT 1";
+        $sql = "SELECT id, password, estado FROM usuario WHERE email = ? LIMIT 1";
         $stmt = $db->prepare($sql);
+
+        if (!$stmt) {
+            die("Error en la consulta: " . $db->error);
+        }
+
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($id_usuario, $password_db);
+            $stmt->bind_result($id_usuario, $password_db, $estado);
             $stmt->fetch();
 
-            // Verificar la contraseña
-            if (password_verify($password, $password_db)) {
+            // Verificar el estado del usuario
+            if ($estado !== 'activo') {
+                $email_error = 'El usuario no está activo.';
+            } elseif ($password === $password_db) { // Comparación directa de contraseñas
                 // Configurar variables de sesión
+                $_SESSION['login'] = true; // Indicador de inicio de sesión
                 $_SESSION['user_id'] = $id_usuario;
                 $_SESSION['user_email'] = $email;
-                $_SESSION['loggedin'] = true;
 
                 // Redirigir al index
                 header("Location: ../../index.php");
@@ -51,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password_error = 'La contraseña es incorrecta.';
             }
         } else {
-            $email_error = 'El correo electrónico no está registrado o no está activo.';
+            $email_error = 'El correo electrónico no está registrado.';
         }
 
         $stmt->close();

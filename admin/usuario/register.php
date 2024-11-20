@@ -29,12 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (strlen($password) < 8) {
                     $message = 'La contraseña debe tener al menos 8 caracteres.';
                 } else {
-                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO usuario (email, password, rol, estado) VALUES (?, ?, ?, 'activo', 1)";
+                    $sql = "INSERT INTO usuario (email, password, rol, estado) VALUES (?, ?, ?, 'activo')";
                     $stmt = $db->prepare($sql);
-                    $stmt->bind_param("sss", $email, $hashed_password, $role);
+                    $stmt->bind_param("sss", $email, $password, $role); // Contraseña sin hashing
                     if ($stmt->execute()) {
-                        // Muestra un mensaje con JavaScript
                         echo "<script>
                                 alert('Registro exitoso. Por favor, inicie sesión.');
                                 window.location.href = 'login.php';
@@ -58,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../stylesheet/login.css">
     <title>Registro</title>
 </head>
-<?php include "../../includes/template/Header.php";?>
+<?php include "../../includes/template/Header.php"; ?>
 <body>
     <div class="container">
         <form class="form" method="POST" action="register.php">
@@ -79,19 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input placeholder="Confirmar Contraseña" class="input-field" type="password" name="confirm_password" required>
             </div>
 
-            <div class="field">
-                <select name="role" required>
-                    <option value="Administrador">Administrador</option>
-                    <option value="Cliente">Cliente</option>
-                </select>
-            </div>
-
             <div class="btn">
                 <a href="login.php" class="button2">Iniciar sesión</a>
                 <button type="submit" class="button1">Registrarse</button>
             </div>
         </form>
     </div>
-    <?php include "../../includes/template/Footer.php";?>
+    <?php include "../../includes/template/Footer.php"; ?>
 </body>
 </html>
