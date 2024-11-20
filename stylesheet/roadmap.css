@@ -1,32 +1,97 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+main {
+    margin: 40px auto;
+    width: 80%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    color: #3498db;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+h3 {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+/* Contenedor del roadmap */
 .roadmap-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
-
+/* Estilo para cada paso */
 .step {
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.step h3 {
-    margin: 0;
+.step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
-
+/* Descripción de los pasos */
+.step p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+/* Línea de conexión entre los pasos */
 .step::before {
     content: '';
     position: absolute;
     left: 50%;
-    top: -20px;
-    width: 2px;
-    height: 20px;
-    background-color: #ccc;
+    top: -30px;
+    width: 4px;
+    height: 30px;
+    background-color: #3498db; /* Azul brillante */
     transform: translateX(-50%);
 }
-
+/* Ocultar la línea en el primer paso */
 .step:first-child::before {
-    display: none; /* Ocultar la lÃ­nea para el primer paso */
+    display: none;
+}
+/* Puntos indicadores en cada paso */
+.step::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    width: 16px;
+    height: 16px;
+    background-color: #3498db;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+/* Estilo para los pasos completados */
+.step.completed {
+    background-color: #e8f7e8; /* Fondo verde suave */
+    border-color: #28a745; /* Borde verde */
+}
+.step.completed h3 {
+    color: #28a745; /* Título en verde */
+}
+/* Estilo para el título principal */
+main section {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }

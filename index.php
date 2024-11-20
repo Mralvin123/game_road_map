@@ -29,7 +29,7 @@
                     <?php
                     // Realizamos la consulta para obtener las categorías
                     try {
-                        $query = "SELECT categoria FROM Ruta_de_estudio GROUP BY categoria";
+                        $query = "SELECT categoria FROM Ruta_de_estudio WHERE estado = 'activo' GROUP BY categoria";
                         $stmt = $pdo->prepare($query);
                         $stmt->execute();
                         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todas las categorías
@@ -52,7 +52,7 @@
         // Realizamos la consulta a la base de datos
         try {
             // Esta consulta selecciona los datos necesarios de la tabla Ruta_de_estudio
-            $query = "SELECT id, categoria, titulo, descripcion FROM Ruta_de_estudio ORDER BY categoria";
+            $query = "SELECT id, categoria, titulo, descripcion FROM Ruta_de_estudio WHERE estado = 'activo' ORDER BY categoria";
             $stmt = $pdo->prepare($query);  // Usamos la conexión PDO para preparar la consulta
             $stmt->execute(); // Ejecutamos la consulta
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todos los resultados como un array asociativo

@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Consulta SQL para obtener los datos del usuario
         $sql = "SELECT id, password, estado, rol FROM usuario WHERE email = ? LIMIT 1";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("s", $email);
+        $stmt->bind_param("s", $email); // Vinculando el parámetro correctamente
         $stmt->execute();
         $stmt->store_result();
 

@@ -27,7 +27,7 @@ $baseURL = "http://localhost/GAME_ROAD_MAP/";
 
         <!-- Authentication Buttons -->
         <div class="auth-buttons">
-            <a href="<?php echo $baseURL; ?>admin/usuario/login.php" class="btn">Login</a>
+            <a href="<?php echo $baseURL; ?>admin/usuario/login.php" class="btn ">Login</a>
             <a href="<?php echo $baseURL; ?>admin/usuario/register.php" class="btn btn-primary">Register</a>
         </div>
 

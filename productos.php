@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Niveles de Suscripción - Roadmaps de Desarrollo de Videojuegos</title>
-    <link rel="stylesheet" href="stylesheet/index.css">
     <link rel="stylesheet" href="stylesheet/Header.css">
     <link rel="stylesheet" href="stylesheet/Footer.css">
     <link rel="stylesheet" href="stylesheet/cards.css"> <!-- Agrega un nuevo archivo CSS para las cards -->
@@ -34,7 +33,7 @@
                 <?php
                 // Realizamos la consulta para obtener los niveles de suscripción
                 try {
-                    $query = "SELECT * FROM `Nivel_de_Subscripcion`";
+                    $query = "SELECT * FROM `Nivel_de_Subscripcion` WHERE estado = 'activo' ";
                     $stmt = $pdo->prepare($query);
                     $stmt->execute();
                     $levels = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todos los niveles de suscripción

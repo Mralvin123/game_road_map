@@ -18,7 +18,7 @@
     // Mostrar mensaje de éxito o error
     if ($res) {
         echo "<script>
-                alert('Se eliminó el registro correctamente.');
+                alert('el usuario fue actualizado a \"Inactivo\" correctamente.');
                 window.location.href = 'listarusuarios.php'; // Redirige a la lista de usuarios
               </script>";
     } else {

@@ -2,7 +2,7 @@
     include "../../includes/config/database.php";
     $db = conectarDB();
 
-    $query = "SELECT Usuario.id, Usuario.email, Usuario.password, Usuario.rol, Usuario.estado, Nivel_de_Subscripcion.nombre AS 'nivel_subs' FROM Usuario JOIN Nivel_de_Subscripcion ON Usuario.id_nivel_subs = Nivel_de_Subscripcion.id WHERE Usuario.estado = 'activo'";
+    $query = "SELECT Usuario.id, Usuario.email, Usuario.password, Usuario.rol, Usuario.estado, Nivel_de_Subscripcion.nombre AS 'nivel_subs' FROM Usuario JOIN Nivel_de_Subscripcion ON Usuario.id_nivel_subs = Nivel_de_Subscripcion.id";
     $resultado = mysqli_query($db, $query);
 ?>
 <!DOCTYPE html>
