@@ -7,9 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    $role = $_POST['role'];
 
-    if (empty($email) || empty($password) || empty($confirm_password) || empty($role)) {
+    if (empty($email) || empty($password) || empty($confirm_password)) {
         $message = 'Por favor complete todos los campos.';
     } else {
         if ($password !== $confirm_password) {
@@ -17,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $db = conectarDB();
 
+            // Verificar si el correo electrónico ya está registrado
             $sql_check_email = "SELECT id FROM usuario WHERE email = ? LIMIT 1";
             $stmt_check_email = $db->prepare($sql_check_email);
             $stmt_check_email->bind_param("s", $email);
@@ -29,9 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (strlen($password) < 8) {
                     $message = 'La contraseña debe tener al menos 8 caracteres.';
                 } else {
-                    $sql = "INSERT INTO usuario (email, password, rol, estado) VALUES (?, ?, ?, 'activo')";
+                    // Insertar el usuario con el rol 'Cliente' en la base de datos y valor predeterminado en id_nivel_subs
+                    $sql = "INSERT INTO usuario (email, password, rol, estado, id_nivel_subs) VALUES (?, ?, 'Cliente', 'activo', 1)";
                     $stmt = $db->prepare($sql);
-                    $stmt->bind_param("sss", $email, $password, $role); // Contraseña sin hashing
+                    $stmt->bind_param("ss", $email, $password); // No hasheamos la contraseña
+
                     if ($stmt->execute()) {
                         echo "<script>
                                 alert('Registro exitoso. Por favor, inicie sesión.');

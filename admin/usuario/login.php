@@ -4,7 +4,6 @@ session_start();
 
 $email_error = '';
 $password_error = '';
-$message = '';
 
 if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
     header("Location: ../index.php"); // Redirigir si ya está logueado
@@ -26,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email_error) && empty($password_error)) {
         $db = conectarDB();
 
-        $sql = "SELECT id, password, estado FROM usuario WHERE email = ? LIMIT 1";
+        // Consulta para obtener los datos del usuario, incluido el rol
+        $sql = "SELECT id, password, estado, rol FROM usuario WHERE email = ? LIMIT 1";
         $stmt = $db->prepare($sql);
 
         if (!$stmt) {
@@ -38,21 +38,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($id_usuario, $password_db, $estado);
+            $stmt->bind_result($id_usuario, $password_db, $estado, $rol);
             $stmt->fetch();
 
-            // Verificar el estado del usuario
-            if ($estado !== 'activo') {
-                $email_error = 'El usuario no está activo.';
-            } elseif ($password === $password_db) { // Comparación directa de contraseñas
-                // Configurar variables de sesión
-                $_SESSION['login'] = true; // Indicador de inicio de sesión
-                $_SESSION['user_id'] = $id_usuario;
-                $_SESSION['user_email'] = $email;
+            // Ejemplo del proceso de login (parte donde se verifica el rol)
+if ($estado === 'activo' && $password === $password_db) {
+    // Guardar la información en la sesión
+    $_SESSION['login'] = true;
+    $_SESSION['user_id'] = $id_usuario;
+    $_SESSION['user_email'] = $email;
+    $_SESSION['rol'] = $rol; // Asegúrate de que el rol se guarda aquí
 
-                // Redirigir al index
-                header("Location: ../../index.php");
-                exit();
+    // Redirigir al index
+    header("Location: ../../index.php");
+    exit();
+}
             } else {
                 $password_error = 'La contraseña es incorrecta.';
             }
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
         $db->close();
     }
-}
+
 ?>
 
 <!DOCTYPE html>

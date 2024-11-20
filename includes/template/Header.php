@@ -6,9 +6,13 @@ $baseURL = "http://localhost/GAME_ROAD_MAP/";
 if (session_status() === PHP_SESSION_NONE) {
     session_start(); // Iniciar la sesión si no está activa
 }
+
+// Asegúrate de que las variables de sesión estén definidas correctamente
+$usuarioLogueado = isset($_SESSION['login']) && $_SESSION['login'] === true;
+$esAdministrador = isset($_SESSION['rol']) && $_SESSION['rol'] === 'Administrador';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +25,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <!-- Logo -->
         <a href="<?php echo $baseURL; ?>index.php" class="logo">GameRoadMap</a>
 
-        <!-- Navigation Links -->
+        <!-- Enlaces de Navegación -->
         <ul class="nav-links">
             <li><a href="<?php echo $baseURL; ?>index.php">Inicio</a></li>
             <li><a href="<?php echo $baseURL; ?>contactanos.php">Contáctanos</a></li>
@@ -29,18 +33,32 @@ if (session_status() === PHP_SESSION_NONE) {
             <li><a href="<?php echo $baseURL; ?>productos.php">Paquetes</a></li>
         </ul>
 
-        <!-- Authentication Buttons -->
+        <!-- Botones de Autenticación -->
+        <?php 
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) { ?>
+    <div class="auth-buttons">
+        <a href="<?php echo $baseURL; ?>admin/usuario/login.php" class="btn">Login</a>
+        <a href="<?php echo $baseURL; ?>admin/usuario/register.php" class="btn btn-primary">Register</a>
+    </div>
+<?php 
+} else {
+    // Si el usuario está logueado
+    ?>
+    <div class="auth-buttons">
+        <a href="admin/cerrarsesion.php" class="btn btn-inline">Cerrar Sesión</a>
+    </div>
+    <?php 
+    // Verificar si el usuario tiene el rol de Administrador
+    if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'Administrador') { ?>
         <div class="auth-buttons">
-            <?php if (isset($_SESSION['login']) && $_SESSION['login'] === true): ?>
-                <!-- Si el usuario está logueado -->
-                <a href="<?php echo $baseURL; ?>admin/index.php" class="btn">Administrador</a>
-                <a href="<?php echo $baseURL; ?>admin/cerrarsesion.php" class="btn btn-inline">Cerrar Sesión</a>
-            <?php else: ?>
-                <!-- Si el usuario no está logueado -->
-                <a href="<?php echo $baseURL; ?>admin/usuario/login.php" class="btn">Login</a>
-                <a href="<?php echo $baseURL; ?>admin/usuario/register.php" class="btn btn-primary">Register</a>
-            <?php endif; ?>
+            <a href="<?php echo $baseURL; ?>admin/index.php" class="btn btn-inline">Administrador</a>
         </div>
+    <?php 
+    } 
+} 
+?>
+        
     </nav>
 </header>
 </body>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Verificar si el usuario está logueado y si tiene el rol de Administrador
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
+    // Si no está logueado o no es un administrador, redirigir a la página de inicio o login
+    header('Location: ../login.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +21,8 @@
 </head>
 <body>
 <?php
-        include "../includes/template/Header.php";
-    ?>
+    include "../includes/template/Header.php";
+?>
     <main class="contenedor seccion">
         <h1>Bienvenido</h1>
         <a href="./tablausu/listarusuarios.php" class="btn btn-primary"> Usuarios </a>
@@ -20,8 +31,8 @@
         <a href="./paquetes/listarsuscripciones.php" class="btn btn-info"> paquetes </a>
     </main>
 
-    <?php
-        include "../includes/template/Footer.php";
-    ?>
+<?php
+    include "../includes/template/Footer.php";
+?>
 </body>
 </html>
