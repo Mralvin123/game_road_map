@@ -1,57 +1,61 @@
 <?php
-require '../../includes/config/database.php'; // Archivo de conexión a la base de datos
+require '../../includes/config/database.php'; // Conexión a la base de datos
 session_start();
+
+$email_error = '';
+$password_error = '';
 $message = '';
 
 if (isset($_SESSION['user_id'])) {
-    // Si ya está logueado, redirigir al index.php
-    header("Location: index.php");
+    header("Location: ../../index.php"); // Redirigir si ya está logueado
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
-    if (empty($email) || empty($password)) {
-        $message = 'Por favor complete todos los campos.';
-    } else {
+    // Validar campos vacíos
+    if (empty($email)) {
+        $email_error = 'El correo electrónico es obligatorio.';
+    }
+    if (empty($password)) {
+        $password_error = 'La contraseña es obligatoria.';
+    }
+
+    if (empty($email_error) && empty($password_error)) {
         $db = conectarDB();
-        // Consulta SQL para obtener los datos del usuario
-        $sql = "SELECT id, password, estado, rol FROM usuario WHERE email = ? LIMIT 1";
+
+        // Verificar si el usuario existe
+        $sql = "SELECT id, password FROM usuario WHERE email = ? AND estado = 'activo' LIMIT 1";
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("s", $email); // Vinculando el parámetro correctamente
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($id_usuario, $password_db, $estado, $rol);
+            $stmt->bind_result($id_usuario, $password_db);
             $stmt->fetch();
 
-            // Verificar si el hash de la base de datos es válido
-            if (!password_get_info($password_db)['algo']) {
-                $message = 'Error: Contraseña almacenada no válida. Contacte al administrador.';
+            // Verificar la contraseña
+            if (password_verify($password, $password_db)) {
+                // Configurar variables de sesión
+                $_SESSION['user_id'] = $id_usuario;
+                $_SESSION['user_email'] = $email;
+                $_SESSION['loggedin'] = true;
+
+                // Redirigir al index
+                header("Location: ../../index.php");
+                exit();
             } else {
-                // Verificar la contraseña con el hash almacenado
-                if (password_verify($password, $password_db)) {
-                    if ($estado === 'activo') {
-                        // Configurar sesión
-                        $_SESSION['user_id'] = $id_usuario;
-                        $_SESSION['user_email'] = $email;
-                        $_SESSION['user_rol'] = $rol;
-                        $_SESSION['loggedin'] = true;  // Esto marca al usuario como logueado
-                        header("Location: index.php"); // Redirige a index.php
-                        exit();  // Evita que el código siga ejecutándose después de la redirección
-                    } else {
-                        $message = 'Cuenta inactiva. Por favor, contacte al administrador.';
-                    }
-                } else {
-                    $message = 'Correo o contraseña incorrectos. Intente de nuevo.';
-                }
+                $password_error = 'La contraseña es incorrecta.';
             }
         } else {
-            $message = 'Correo o contraseña incorrectos. Intente de nuevo.';
+            $email_error = 'El correo electrónico no está registrado o no está activo.';
         }
+
+        $stmt->close();
+        $db->close();
     }
 }
 ?>
@@ -69,16 +73,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <form class="form" method="POST" action="login.php">
             <h1>Iniciar sesión</h1>
-            <?php if (!empty($message)): ?>
-                <p style="color: red;"><?= $message ?></p>
-            <?php endif; ?>
 
             <div class="field">
-                <input placeholder="Correo electrónico" class="input-field" type="email" name="email" required>
+                <input placeholder="Correo electrónico" class="input-field" type="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" required>
+                <?php if (!empty($email_error)): ?>
+                    <p style="color: red;"><?= htmlspecialchars($email_error) ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="field">
                 <input placeholder="Contraseña" class="input-field" type="password" name="password" required>
+                <?php if (!empty($password_error)): ?>
+                    <p style="color: red;"><?= htmlspecialchars($password_error) ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="btn">
