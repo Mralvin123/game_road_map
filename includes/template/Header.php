@@ -46,12 +46,12 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) { ?>
     // Si el usuario está logueado
     ?>
     <div class="auth-buttons">
-        <a href="admin/cerrarsesion.php" class="btn btn-inline">Cerrar Sesión</a>
-    </div>
+        <a href="<?php echo $baseURL; ?>admin/cerrarsesion.php" class="btn btn-inline">Cerrar Sesión</a>
+    
     <?php 
     // Verificar si el usuario tiene el rol de Administrador
     if (isset($_SESSION['rol']) && $_SESSION['rol'] == 'Administrador') { ?>
-        <div class="auth-buttons">
+        
             <a href="<?php echo $baseURL; ?>admin/index.php" class="btn btn-inline">Administrador</a>
         </div>
     <?php 

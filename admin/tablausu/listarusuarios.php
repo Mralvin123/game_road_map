@@ -40,13 +40,29 @@
                     <td><?php echo $usuario['rol']; ?></td>
                     <td><?php echo $usuario['estado']; ?></td>
                     <td><?php echo $usuario['nivel_subs']; ?></td>
-
-                    <?php echo "<td> <a href=eliminar.php?cod=".$usuario['id']." class='btn btn-danger'> ELIMINAR </a></td>";?>
-                    <?php echo "<td> <a href=actualizar.php?cod=".$usuario['id']." class='btn btn-success'> MODIFICAR </a></td>";?>
-                    
+                    <td>
+                        <?php echo "<td> <a href=eliminar.php?cod=".$usuario['id']." class='btn btn-danger'> ELIMINAR </a></td>";?>
+                        <?php echo "<td> <a href=actualizar.php?cod=".$usuario['id']." class='btn btn-success'> MODIFICAR </a></td>";?>
+                    </td>    
                 </tr>
             <?php endwhile; ?>
         </tbody>
+
+<tbody>
+            <?php while ($nivel = mysqli_fetch_assoc($resultado)) : ?>
+                <tr>
+                    <td><?php echo $nivel['id']; ?></td>
+                    <td><?php echo $nivel['costo']; ?></td>
+                    <td><?php echo $nivel['nombre']; ?></td>
+                    <td><?php echo $nivel['estado']; ?></td>
+                    <td>
+                        <?php echo "<a href='eliminar.php?id=".$nivel['id']."' class='btn btn-danger'>Eliminar</a>"; ?>
+                        <?php echo "<a href='actualizar.php?id=".$nivel['id']."' class='btn btn-success'>Modificar</a>"; ?>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+
     </table>
 </body>
 <?php include "../../includes/template/Footer.php";?>
