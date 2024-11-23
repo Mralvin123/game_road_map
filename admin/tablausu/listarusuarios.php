@@ -55,10 +55,10 @@
                     <td><?php echo $nivel['costo']; ?></td>
                     <td><?php echo $nivel['nombre']; ?></td>
                     <td><?php echo $nivel['estado']; ?></td>
-                    <td>
+
                         <?php echo "<a href='eliminar.php?id=".$nivel['id']."' class='btn btn-danger'>Eliminar</a>"; ?>
                         <?php echo "<a href='actualizar.php?id=".$nivel['id']."' class='btn btn-success'>Modificar</a>"; ?>
-                    </td>
+
                 </tr>
             <?php endwhile; ?>
         </tbody>

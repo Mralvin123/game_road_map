@@ -1,5 +1,5 @@
 <?php
-require '../../includes/config/database.php'; // Conexión a la base de datos
+require '../../includes/config/database.php';
 session_start();
 
 $email_error = '';
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email_error) && empty($password_error)) {
         $db = conectarDB();
 
-        // Consulta para obtener los datos del usuario, incluido el rol
+        // Consulta para obtener los datos del usuario
         $sql = "SELECT id, password, estado, rol FROM usuario WHERE email = ? LIMIT 1";
         $stmt = $db->prepare($sql);
 
@@ -41,20 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_result($id_usuario, $password_db, $estado, $rol);
             $stmt->fetch();
 
-            // Ejemplo del proceso de login (parte donde se verifica el rol)
-if ($estado === 'activo' && $password === $password_db) {
-    // Guardar la información en la sesión
-    $_SESSION['login'] = true;
-    $_SESSION['user_id'] = $id_usuario;
-    $_SESSION['user_email'] = $email;
-    $_SESSION['rol'] = $rol; // Asegúrate de que el rol se guarda aquí
+            // Verificar la contraseña con md5
+            if (md5($password) === $password_db && $estado === 'activo') {
+                // Guardar la información en la sesión
+                $_SESSION['login'] = true;
+                $_SESSION['user_id'] = $id_usuario;
+                $_SESSION['user_email'] = $email;
+                $_SESSION['rol'] = $rol;
 
-    // Redirigir al index
-    header("Location: ../../index.php");
-    exit();
-}
+                // Redirigir al index
+                header("Location: ../../index.php");
+                exit();
             } else {
-                $password_error = 'La contraseña es incorrecta.';
+                $password_error = 'La contraseña es incorrecta o el usuario está inactivo.';
             }
         } else {
             $email_error = 'El correo electrónico no está registrado.';
@@ -63,7 +62,7 @@ if ($estado === 'activo' && $password === $password_db) {
         $stmt->close();
         $db->close();
     }
-
+}
 ?>
 
 <!DOCTYPE html>

@@ -28,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $estado = mysqli_real_escape_string($db, $_POST['estado']);
     $id_nivel_subs = mysqli_real_escape_string($db, $_POST['id_nivel_subs']);
 
-    // Encriptar la nueva contraseña (siempre)
-    $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+    // Encriptar la nueva contraseña usando md5
+    $passwordHash = md5($password);
 
     // Actualizar el registro en la base de datos
     $query = "UPDATE usuario SET 
