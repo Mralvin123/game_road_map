@@ -27,8 +27,9 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'Administrador') {
         <h1>Bienvenido</h1>
         <a href="./tablausu/listarusuarios.php" class="btn btn-primary"> Usuarios </a>
         <a href="./rutadeestudio/listarestudio.php" class="btn btn-warning"> Ruta de estudio </a>
-        <a href="./pasos/listarpasos.php" class="btn btn-success"> pasos </a>
-        <a href="./paquetes/listarsuscripciones.php" class="btn btn-info"> paquetes </a>
+        <a href="./pasos/listarpasos.php" class="btn btn-success"> Pasos </a>
+        <a href="./paquetes/listarsuscripciones.php" class="btn btn-info"> Paquetes </a>
+        <a href="./categoria/listarcategoria.php" class="btn btn-dark"> Categoria </a>
     </main>
 
 <?php

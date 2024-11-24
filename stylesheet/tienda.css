@@ -1,0 +1,106 @@
+/* Estilos generales para la tienda */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para la cabecera */
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Estilos de la sección principal (intro) */
+.intro {
+    background-color: #008CBA;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.intro h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+.intro p {
+    font-size: 18px;
+}
+
+/* Estilos para las tarjetas de los productos */
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    margin: 15px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-title {
+    font-size: 24px;
+    color: #333;
+}
+
+.product-description {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.product-price {
+    font-size: 20px;
+    color: #00A859;
+    font-weight: bold;
+}
+
+.buy-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #008CBA;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.buy-btn:hover {
+    background-color: #005F73;
+}
+
+/* Adaptación responsiva */
+@media (max-width: 768px) {
+    .products-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        width: 80%;
+        margin: 15px 0;
+    }
+}

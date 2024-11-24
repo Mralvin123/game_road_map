@@ -2,12 +2,15 @@
     include "../../includes/config/database.php";
     $db = conectarDB();
 
-    // Consulta para obtener los datos de la tabla `ruta_de_estudio` con estado 'Activo'
-    $query = "SELECT id, titulo, descripcion, categoria, estado FROM ruta_de_estudio ";
+    // Consulta para obtener los datos de la tabla `ruta_de_estudio` con sus categorías
+    $query = "
+        SELECT r.id, r.titulo, r.descripcion, c.Titulo AS categoria, r.estado 
+        FROM ruta_de_estudio r
+        INNER JOIN categoria c ON r.idCategoria = c.id";
     $resultado = mysqli_query($db, $query);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,14 +35,14 @@
         <tbody>
             <?php while ($ruta = mysqli_fetch_assoc($resultado)) : ?>
                 <tr>
-                    <td><?php echo $ruta['id']; ?></td>
-                    <td><?php echo $ruta['titulo']; ?></td>
-                    <td><?php echo $ruta['descripcion']; ?></td>
-                    <td><?php echo $ruta['categoria']; ?></td>
-                    <td><?php echo $ruta['estado']; ?></td>
+                    <td><?php echo htmlspecialchars($ruta['id']); ?></td>
+                    <td><?php echo htmlspecialchars($ruta['titulo']); ?></td>
+                    <td><?php echo nl2br(htmlspecialchars($ruta['descripcion'])); ?></td>
+                    <td><?php echo htmlspecialchars($ruta['categoria']); ?></td>
+                    <td><?php echo htmlspecialchars($ruta['estado']); ?></td>
                     <td>
-                        <a href="eliminar.php?cod=<?php echo $ruta['id']; ?>" class='btn btn-danger'>ELIMINAR</a>
-                        <a href="actualizar.php?cod=<?php echo $ruta['id']; ?>" class='btn btn-success'>MODIFICAR</a>
+                        <a href="eliminar.php?cod=<?php echo htmlspecialchars($ruta['id']); ?>" class='btn btn-danger'>ELIMINAR</a>
+                        <a href="actualizar.php?cod=<?php echo htmlspecialchars($ruta['id']); ?>" class='btn btn-success'>MODIFICAR</a>
                     </td>
                 </tr>
             <?php endwhile; ?>

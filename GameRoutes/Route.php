@@ -9,7 +9,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     try {
         // Realizamos la consulta para obtener la ruta de estudio según el ID
-        $query = "SELECT categoria, titulo, descripcion FROM Ruta_de_estudio WHERE id = :id";
+        $query = "SELECT titulo, descripcion FROM ruta_de_estudio WHERE id = :id";
         $stmt = $pdo->prepare($query);
         $stmt->bindParam(':id', $routeId, PDO::PARAM_INT); // Vinculamos el parámetro
         $stmt->execute();
@@ -23,7 +23,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         }
 
         // Consulta para obtener los pasos de la ruta de estudio
-        $querySteps = "SELECT id, titulo, descripcion, id_Paso_Previo FROM Paso WHERE id_Ruta = :id";
+        $querySteps = "SELECT id, titulo, descripcion, id_Paso_Previo FROM paso WHERE id_Ruta = :id";
         $stmtSteps = $pdo->prepare($querySteps);
         $stmtSteps->bindParam(':id', $routeId, PDO::PARAM_INT); // Vinculamos el parámetro
         $stmtSteps->execute();
@@ -57,12 +57,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     <main>
         <section>
-            <h2>Categoría: <?php echo htmlspecialchars($route['titulo']); ?></h2>
+            <h2>Ruta de Estudio: <?php echo htmlspecialchars($route['titulo']); ?></h2>
             <p><?php echo nl2br(htmlspecialchars($route['descripcion'])); ?></p> <!-- nl2br para mantener saltos de línea -->
         </section>
 
         <section class="roadmap">
-            <h2>Roadmap de Pasos</h2>
+            <h2>Pasos del Roadmap</h2>
             <div class="roadmap-container">
                 <?php
                 // Crear un array para almacenar pasos por ID

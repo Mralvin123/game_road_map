@@ -31,6 +31,7 @@ $esAdministrador = isset($_SESSION['rol']) && $_SESSION['rol'] === 'Administrado
             <li><a href="<?php echo $baseURL; ?>contactanos.php">Contáctanos</a></li>
             <li><a href="<?php echo $baseURL; ?>acercade.php">Acerca de</a></li>
             <li><a href="<?php echo $baseURL; ?>productos.php">Paquetes</a></li>
+            <li><a href="<?php echo $baseURL; ?>tienda.php">Tienda</a></li>
         </ul>
 
         <!-- Botones de Autenticación -->

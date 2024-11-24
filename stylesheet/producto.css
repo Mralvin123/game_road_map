@@ -1,0 +1,19 @@
+.shop-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.shop-btn {
+    background-color: #4CAF50; /* Color de fondo verde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambio de cursor al pasar por encima */
+    transition: background-color 0.3s ease; /* Efecto de transición al pasar el ratón */
+}
+
+.shop-btn:hover {
+    background-color: #45a049; /* Cambio de color al pasar el ratón */
+}

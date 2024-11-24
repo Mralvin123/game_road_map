@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-<link rel="stylesheet" href="stylesheet/producto.css">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niveles de Suscripción - Roadmaps de Desarrollo de Videojuegos</title>
+    <title>Tienda - Paquetes de Suscripción</title>
     <link rel="stylesheet" href="stylesheet/Header.css">
     <link rel="stylesheet" href="stylesheet/Footer.css">
-    <link rel="stylesheet" href="stylesheet/cards.css"> <!-- Agrega un nuevo archivo CSS para las cards -->
+    <link rel="stylesheet" href="stylesheet/tienda.css"> <!-- Archivo CSS específico para productos -->
 </head>
 
 <body>
@@ -23,17 +23,17 @@
     <main>
         <section class="intro">
             <div class="intro-content">
-                <h1>Niveles de Suscripción</h1>
-                <p>Explora nuestros niveles de suscripción y elige el que mejor se adapte a tus necesidades.</p>
+                <h1>Compra Tu Paquete de Suscripción</h1>
+                <p>Selecciona el nivel de suscripción que más te convenga y disfruta de los beneficios exclusivos.</p>
             </div>
         </section>
 
-        <section class="subscription-levels">
-            <div class="levels-container">
+        <section class="products">
+            <div class="products-container">
                 <?php
-                // Realizamos la consulta para obtener los niveles de suscripción
+                // Consulta para obtener los niveles de suscripción activos
                 try {
-                    $query = "SELECT * FROM `Nivel_de_Subscripcion` WHERE estado = 'activo' ";
+                    $query = "SELECT * FROM `Nivel_de_Subscripcion` WHERE estado = 'activo'";
                     $stmt = $pdo->prepare($query);
                     $stmt->execute();
                     $levels = $stmt->fetchAll(PDO::FETCH_ASSOC); // Obtenemos todos los niveles de suscripción
@@ -44,10 +44,11 @@
                             $levelName = htmlspecialchars($level['nombre']); // Escapamos el nombre del nivel
                             $levelPrice = htmlspecialchars($level['costo']); // Escapamos el precio
 
-                            // Mostramos cada nivel de suscripción en una tarjeta
-                            echo "<div class='subscription-card'>";
-                            echo "<h2 class='card-title'>{$levelName}</h2>";
-                            echo "<p class='card-price'>Precio: {$levelPrice} €</p>";
+                            // Mostramos cada nivel de suscripción en una tarjeta sin descripción
+                            echo "<div class='product-card'>";
+                            echo "<h2 class='product-title'>{$levelName}</h2>";
+                            echo "<p class='product-price'>Precio: {$levelPrice} €</p>";
+                            echo "<a href='#' class='buy-btn'>Comprar</a>"; // Enlace a la página de compra (puedes agregar lógica de compra aquí)
                             echo "</div>";
                         }
                     } else {
@@ -59,13 +60,6 @@
                 }
                 ?>
             </div>
-        </section>
-
-        <!-- Botón para ir a la página de tienda.php -->
-        <section class="shop-button">
-            <a href="tienda.php">
-                <button class="shop-btn">Ir a la tienda</button>
-            </a>
         </section>
     </main>
 
