@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($resultado) {
         echo "<script>
                 alert('Categoría actualizada correctamente.');
-                window.location.href = 'listarcategorias.php'; // Redirigir a la lista de categorías
+                window.location.href = 'listarcategoria.php'; // Redirigir a la lista de categorías
               </script>";
     } else {
         echo "<script>alert('Error al actualizar la categoría.');</script>";

@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 echo "<script>
                         alert('Categoría registrada exitosamente.');
-                        window.location.href = '../index.php'; // Redirigir al index
+                        window.location.href = './listarcategoria.php';  
                       </script>";
             } else {
                 echo "<script>alert('Error al registrar la categoría.');</script>";
