@@ -41,8 +41,8 @@
                     <td><?php echo $usuario['estado']; ?></td>
                     <td><?php echo $usuario['nivel_subs']; ?></td>
                     <td>
-                        <?php echo "<td> <a href=eliminar.php?cod=".$usuario['id']." class='btn btn-danger'> ELIMINAR </a></td>";?>
-                        <?php echo "<td> <a href=actualizar.php?cod=".$usuario['id']." class='btn btn-success'> MODIFICAR </a></td>";?>
+                        <?php echo "<a style='margin-right: 20px;'href=eliminar.php?cod=".$usuario['id']." class='btn btn-danger'> ELIMINAR </a>";?>
+                        <?php echo "<a href=actualizar.php?cod=".$usuario['id']." class='btn btn-success'> MODIFICAR </a>";?>
                     </td>    
                 </tr>
             <?php endwhile; ?>
