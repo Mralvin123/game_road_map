@@ -6,17 +6,6 @@ body {
     padding: 0;
 }
 
-/* Estilo para la cabecera */
-header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-}
 
 /* Estilos de la sección principal (intro) */
 .intro {
@@ -59,10 +48,6 @@ header h1 {
     transform: scale(1.05);
 }
 
-.product-title {
-    font-size: 24px;
-    color: #333;
-}
 
 .product-description {
     font-size: 16px;
@@ -90,6 +75,47 @@ header h1 {
 
 .buy-btn:hover {
     background-color: #005F73;
+}
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-card .product-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-card .product-price {
+    color: #28a745;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.product-card .product-description {
+    font-size: 1rem;
+    color: #555;
+    margin: 10px 0;
+}
+
+.product-card .buy-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.product-card .buy-btn:hover {
+    background-color: #0056b3;
 }
 
 /* Adaptación responsiva */

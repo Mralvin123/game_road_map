@@ -25,12 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $costo = mysqli_real_escape_string($db, $_POST['costo']);
     $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
     $estado = mysqli_real_escape_string($db, $_POST['estado']);
+    $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);  // Agregar descripción
 
     // Consulta para actualizar el registro
     $query = "UPDATE nivel_de_subscripcion SET 
               costo = '$costo', 
               nombre = '$nombre', 
-              estado = '$estado' 
+              estado = '$estado',
+              descripcion = '$descripcion'  /* Agregar descripción a la consulta */
               WHERE id = '$idNivel'";
 
     $resultado = mysqli_query($db, $query);
@@ -47,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,6 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <option value="activo" <?php echo $nivel['estado'] === 'activo' ? 'selected' : ''; ?>>Activo</option>
             <option value="inactivo" <?php echo $nivel['estado'] === 'inactivo' ? 'selected' : ''; ?>>Inactivo</option>
         </select>
+
+        <!-- Agregar campo de descripción -->
+        <label for="descripcion">Descripción:</label>
+        <textarea name="descripcion" id="descripcion" required><?php echo $nivel['descripcion']; ?></textarea>
 
         <input type="submit" value="Actualizar Nivel" class="boton boton-verde">
     </form>

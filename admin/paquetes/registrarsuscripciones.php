@@ -6,15 +6,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar si las claves existen en el array $_POST
     $costo = isset($_POST['costo']) ? $_POST['costo'] : null;
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
+    $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : null; // Agregar descripción
     $estado = isset($_POST['estado']) ? $_POST['estado'] : null;
 
     // Validar que todos los campos requeridos están presentes
-    if ($costo !== null && $nombre && $estado) {
+    if ($costo !== null && $nombre && $descripcion && $estado) {
         include "../../includes/config/database.php";
         $db = conectarDB();
 
-        $consql = "INSERT INTO nivel_de_subscripcion (costo, nombre, estado) 
-                   VALUES ('$costo', '$nombre', '$estado')";
+        // Consulta para insertar el nuevo nivel de suscripción
+        $consql = "INSERT INTO nivel_de_subscripcion (costo, nombre, descripcion, estado) 
+                   VALUES ('$costo', '$nombre', '$descripcion', '$estado')";
         $res = mysqli_query($db, $consql);
 
         if ($res) {
@@ -48,8 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="nombre">Nombre:</label>
     <input type="text" name="nombre" required><br>
 
+    <label for="descripcion">Descripción:</label> <!-- Agregamos campo para descripción -->
+    <textarea name="descripcion" rows="4" cols="50" required></textarea><br>
+
     <label for="estado">Estado:</label>
-    <input type="text" name="estado" required><br>
+    <select name="estado" required>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+    </select><br>
 
     <input type="submit" value="Registrar Nivel">
 </form>

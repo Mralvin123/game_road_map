@@ -1,4 +1,6 @@
 <?php
+ 
+    // Conexión a la base de datos
     include "../../includes/config/database.php";
     $db = conectarDB();
 
@@ -7,9 +9,11 @@
                 id, 
                 costo, 
                 nombre, 
+                descripcion, 
                 estado 
               FROM nivel_de_subscripcion";
     $resultado = mysqli_query($db, $query);
+    include "../../includes/template/header.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,16 +23,18 @@
     <link rel="stylesheet" href="../../stylesheet/listausu.css">
     <title>Lista de Niveles de Suscripción</title>
 </head>
-<?php include "../../includes/template/header.php"; ?>
+
 <body>
+    
     <h1>Lista de Niveles de Suscripción</h1>
-    <a href="./registrarsuscripciones.php" class='btn btn-success'>Registrar suscripcion</a>
+    <a href="./registrarsuscripciones.php" class='btn btn-success'>Registrar suscripción</a>
     <table class="table table-success table-striped">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Costo</th>
                 <th>Nombre</th>
+                <th>Descripción</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -37,12 +43,13 @@
             <?php while ($nivel = mysqli_fetch_assoc($resultado)) : ?>
                 <tr>
                     <td><?php echo $nivel['id']; ?></td>
-                    <td><?php echo $nivel['costo']; ?></td>
-                    <td><?php echo $nivel['nombre']; ?></td>
-                    <td><?php echo $nivel['estado']; ?></td>
+                    <td><?php echo number_format($nivel['costo'], 2); ?></td>
+                    <td><?php echo htmlspecialchars($nivel['nombre']); ?></td>
+                    <td style="max-width: 500px;"><?php echo htmlspecialchars($nivel['descripcion']); ?></td>
+                    <td><?php echo htmlspecialchars($nivel['estado']); ?></td>
                     <td>
-                        <?php echo "<a href='eliminar.php?id=".$nivel['id']."' class='btn btn-danger'>Eliminar</a>"; ?>
-                        <?php echo "<a href='actualizar.php?id=".$nivel['id']."' class='btn btn-success'>Modificar</a>"; ?>
+                        <a href="eliminar.php?id=<?php echo $nivel['id']; ?>" class="btn btn-danger">Eliminar</a>
+                        <a href="actualizar.php?id=<?php echo $nivel['id']; ?>" class="btn btn-success">Modificar</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
