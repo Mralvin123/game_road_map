@@ -88,6 +88,16 @@ table tbody tr:hover {
     background-color: #218838;
 }
 
+.btn-view {
+    background-color: #2850a7;
+    color: white;
+    border: none;
+}
+
+.btn-view:hover {
+    background-color: #1a3c85;
+}
+
 a {
     text-decoration: none;
 }

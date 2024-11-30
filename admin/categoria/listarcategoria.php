@@ -40,9 +40,10 @@
                     <td><?php echo $categoria['Titulo']; ?></td>
                     <td><?php echo $categoria['Descripcion']; ?></td>
                     <td><?php echo $categoria['estado']; ?></td>
-                    <td>
+                    <td style="height: 110px; display: flex; flex-direction: column; justify-content: space-around;">
                         <?php echo "<a href='eliminar.php?id=".$categoria['id']."' class='btn btn-danger'>Eliminar</a>"; ?>
                         <?php echo "<a href='actualizar.php?id=".$categoria['id']."' class='btn btn-success'>Modificar</a>"; ?>
+                        <?php echo "<a href='visualizar-categoria.php?id=".$categoria['id']."' class='btn btn-view'>Visualizar</a>"; ?>
                     </td>
                 </tr>
             <?php endwhile; ?>

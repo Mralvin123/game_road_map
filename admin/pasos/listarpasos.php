@@ -46,9 +46,10 @@
                     <td><?php echo $paso['id_Ruta']; ?></td>
                     <td><?php echo $paso['id_Paso_Previo'] ? $paso['id_Paso_Previo'] : 'N/A'; ?></td>
                     <td><?php echo $paso['estado']; ?></td>
-                    <td>
+                    <td style="height: 110px; display: flex; flex-direction: column; justify-content: space-around;">
                         <?php echo "<a href='eliminar.php?id=".$paso['id']."' class='btn btn-danger'>Eliminar</a>"; ?>
                         <?php echo "<a href='actualizar.php?cod=".$paso['id']."' class='btn btn-success'>Modificar</a>"; ?>
+                        <a href="visualizarpaso.php?id=<?php echo htmlspecialchars($paso['id']); ?>" class="btn btn-view">Visualizar</a>
                     </td>
                 </tr>
             <?php endwhile; ?>

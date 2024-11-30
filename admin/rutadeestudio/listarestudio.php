@@ -37,12 +37,13 @@
                 <tr>
                     <td><?php echo htmlspecialchars($ruta['id']); ?></td>
                     <td><?php echo htmlspecialchars($ruta['titulo']); ?></td>
-                    <td><?php echo nl2br(htmlspecialchars($ruta['descripcion'])); ?></td>
+                    <td style="max-width: 250px;"><?php echo nl2br(htmlspecialchars($ruta['descripcion'])); ?></td>
                     <td><?php echo htmlspecialchars($ruta['categoria']); ?></td>
                     <td><?php echo htmlspecialchars($ruta['estado']); ?></td>
-                    <td>
-                        <a href="eliminar.php?cod=<?php echo htmlspecialchars($ruta['id']); ?>" class='btn btn-danger'>ELIMINAR</a>
-                        <a href="actualizar.php?cod=<?php echo htmlspecialchars($ruta['id']); ?>" class='btn btn-success'>MODIFICAR</a>
+                    <td style="height: 110px; display: flex; flex-direction: column; justify-content: space-around;">
+                            <a href="eliminar.php?cod=<?php echo htmlspecialchars($ruta['id']); ?>" class='btn btn-danger'>ELIMINAR</a>
+                            <a href="actualizar.php?cod=<?php echo htmlspecialchars($ruta['id']); ?>" class='btn btn-success'>MODIFICAR</a>
+                            <a href="visualizar-ruta-estudio.php?id=<?php echo htmlspecialchars($ruta['id']); ?>" class="btn btn-view">VISUALIZAR</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
