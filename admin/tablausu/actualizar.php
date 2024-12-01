@@ -2,7 +2,7 @@
 include "../../includes/config/database.php";
 $db = conectarDB();
 
-// Validar si el parámetro 'id' está definido
+// Validar si el parámetro 'cod' está definido
 if (!isset($_GET['cod'])) {
     die("Error: El parámetro 'cod' no está definido.");
 }
@@ -19,6 +19,10 @@ if (!$resultado || mysqli_num_rows($resultado) === 0) {
 }
 
 $usuario = mysqli_fetch_assoc($resultado);
+
+// Obtener los niveles de suscripción para el desplegable
+$queryNiveles = "SELECT id, nombre FROM nivel_de_subscripcion WHERE estado = 'activo'";
+$resultadoNiveles = mysqli_query($db, $queryNiveles);
 
 // Actualizar datos si se envía el formulario
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -53,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,8 +81,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <label for="estado">Estado:</label>
         <input type="text" name="estado" id="estado" value="<?php echo $usuario['estado']; ?>" required>
 
-        <label for="id_nivel_subs">ID Nivel Subscripción:</label>
-        <input type="text" name="id_nivel_subs" id="id_nivel_subs" value="<?php echo $usuario['id_nivel_subs']; ?>" required>
+        <label for="id_nivel_subs">Nivel de Suscripción:</label>
+        <select name="id_nivel_subs" id="id_nivel_subs" required>
+            <option value="" disabled>Seleccione un nivel</option>
+            <?php
+            while ($nivel = mysqli_fetch_assoc($resultadoNiveles)) {
+                // Comparar el ID actual del usuario con el ID del nivel
+                $selected = ($nivel['id'] == $usuario['id_nivel_subs']) ? 'selected' : '';
+                echo "<option value='{$nivel['id']}' $selected>{$nivel['nombre']}</option>";
+            }
+            ?>
+        </select><br>
 
         <input type="submit" value="Actualizar Usuario" class="boton boton-verde">
     </form>

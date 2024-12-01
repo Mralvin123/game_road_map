@@ -90,12 +90,11 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <a href="actualizar.php?cod=<?php echo htmlspecialchars($stepId); ?>" class="btn btn-success">MODIFICAR</a>
         </div>
     </section>
-
-
+</main>
 
         <section>
             <h2>Recursos Extra</h2>
-            <a href="../recursos/registrarrecursos.php?cod=<?php echo htmlspecialchars($step['id']) ?>" class='btn btn-success'>Registrar Recurso</a>
+            <a href="../recursosextra/registrarrecurso.php?cod=<?php echo htmlspecialchars($step['id']) ?>" class='btn btn-success'>Registrar Recurso</a>
             <table class="table table-success table-striped">
                 <thead>
                     <tr>
@@ -120,8 +119,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                             <td><?php echo htmlspecialchars($resource['nivel de subscripcion']); ?></td>
                             <td><?php echo htmlspecialchars($resource['estado']); ?></td>
                             <td>
-                                <a href="../recursos/eliminar.php?cod=<?php echo htmlspecialchars($resource['id']); ?>" class='btn btn-danger'>Eliminar</a>
-                                <a href="../recursos/actualizar.php?cod=<?php echo htmlspecialchars($resource['id']); ?>" class='btn btn-success'>Modificar</a>
+                                <a href="../recursosextra/eliminar.php?id=<?php echo htmlspecialchars($resource['id']); ?>" class='btn btn-danger'>Eliminar</a>
+                                <a href="../recursosextra/actualizar.php?id=<?php echo htmlspecialchars($resource['id']); ?>" class='btn btn-success'>Modificar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

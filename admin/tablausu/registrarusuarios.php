@@ -1,9 +1,16 @@
 <?php
 include "../../includes/template/header.php";
+include "../../includes/config/database.php";
+
+// Conectar a la base de datos
+$db = conectarDB();
+
+// Obtener los niveles de suscripción de la base de datos
+$query = "SELECT id, nombre FROM nivel_de_subscripcion WHERE estado = 'activo'";
+$resultado = mysqli_query($db, $query);
 
 // Verificar si se han enviado los datos del formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar si las claves existen en el array $_POST
     $email = isset($_POST['email']) ? $_POST['email'] : null;
     $password = isset($_POST['password']) ? $_POST['password'] : null;
     $rol = isset($_POST['rol']) ? $_POST['rol'] : null;
@@ -12,9 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validar que todos los campos requeridos están presentes
     if ($email && $password && $rol && $estado && $id_nivel_subs) {
-        include "../../includes/config/database.php";
-        $db = conectarDB();
-
         // Obtener el último ID de la base de datos y sumar 1
         $query = "SELECT MAX(id) AS max_id FROM usuario";
         $resultado = mysqli_query($db, $query);
@@ -42,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,26 +56,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Registrar Usuario</title>
 </head>
 <body>
-   <!-- Formulario HTML para agregar un nuevo usuario -->
    <h1>Registrar Usuario</h1>
-<form method="POST" action="">
-    <label for="email">Email:</label>
-    <input type="email" name="email" required><br>
+   <form method="POST" action="">
+       <label for="email">Email:</label>
+       <input type="email" name="email" required><br>
 
-    <label for="password">Contraseña:</label>
-    <input type="password" name="password" required><br>
+       <label for="password">Contraseña:</label>
+       <input type="password" name="password" required><br>
 
-    <label for="rol">Rol:</label>
-    <input type="text" name="rol" required><br>
+       <label for="rol">Rol:</label>
+       <input type="text" name="rol" required><br>
 
-    <label for="estado">Estado:</label>
-    <input type="text" name="estado" required><br>
+       <label for="estado">Estado:</label>
+       <input type="text" name="estado" required><br>
 
-    <label for="id_nivel_subs">ID Nivel Subs:</label>
-    <input type="text" name="id_nivel_subs" required><br>
+       <label for="id_nivel_subs">Nivel de Suscripción:</label>
+       <select name="id_nivel_subs" required>
+           <option value="" disabled selected>Seleccione un nivel</option>
+           <?php
+           // Generar opciones dinámicamente
+           while ($nivel = mysqli_fetch_assoc($resultado)) {
+               echo "<option value='{$nivel['id']}'>{$nivel['nombre']}</option>";
+           }
+           ?>
+       </select><br>
 
-    <input type="submit" value="Registrar Usuario">
-</form>
-<?php include "../../includes/template/Footer.php"; ?> 
+       <input type="submit" value="Registrar Usuario">
+   </form>
+   <?php include "../../includes/template/Footer.php"; ?> 
 </body>
 </html>
