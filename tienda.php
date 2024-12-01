@@ -54,7 +54,7 @@
                             echo "<h2 class='product-title'>{$levelName}</h2>";
                             echo "<p class='product-price'>Precio: {$levelPrice} €</p>";
                             echo "<p class='product-description'>{$levelDescription}</p>"; // Agregamos la descripción
-                            echo "<a href='comprar.php?id={$levelId}' class='buy-btn'>Comprar</a>"; // Enlace a la página de compra
+                            echo "<a href='productos.php?id={$levelId}' class='buy-btn'>Comprar</a>"; // Enlace actualizado
                             echo "</div>";
                         }
                     } else {

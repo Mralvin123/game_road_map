@@ -1,0 +1,75 @@
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo general */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Sección principal de detalles del producto */
+.product-details {
+    width: 80%;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del producto */
+.product-details h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Descripción del producto */
+.product-details p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Precio */
+.product-details p strong {
+    color: #2f3578;
+}
+
+/* Botón de compra */
+.buy-btn {
+    padding: 15px 30px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buy-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Mensaje de error si no está logueado */
+.product-details .error-message {
+    color: #e74c3c;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+/* Formulario de compra */
+form {
+    margin-top: 30px;
+}
+
+/* Input ocultos para el formulario */
+form input[type="hidden"] {
+    display: none;
+}
