@@ -10,9 +10,10 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Validar si se recibió el parámetro 'id'
 if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $stepId = htmlspecialchars($_GET['id']);
-    $userId = $_SESSION['user_id']; // Obtener el ID del usuario logueado
+    $stepId = htmlspecialchars($_GET['id']); // Escapar el valor para seguridad
+    $userId = $_SESSION['user_id']; // ID del usuario logueado
 
     try {
         // Obtener datos del paso
@@ -27,11 +28,29 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             exit;
         }
 
-        // Obtener recursos adicionales
+        // Obtener el nivel de suscripción del usuario
+        $queryUserSub = "
+            SELECT n.costo 
+            FROM usuario u
+            JOIN nivel_de_subscripcion n ON u.id_nivel_subs = n.id
+            WHERE u.id = ?
+        ";
+        $stmtUserSub = $pdo->prepare($queryUserSub);
+        $stmtUserSub->execute([$userId]);
+
+        if ($stmtUserSub->rowCount() > 0) {
+            $userSub = $stmtUserSub->fetch(PDO::FETCH_ASSOC)['costo'];
+        } else {
+            echo "<p>Error: Nivel de suscripción del usuario no encontrado.</p>";
+            exit;
+        }
+
+        // Obtener recursos adicionales con validación de nivel de suscripción
         $queryResources = "
-            SELECT r.titulo, r.url, t.nombre AS tipo
+            SELECT r.titulo, r.url, t.nombre AS tipo, n.costo AS recursoCosto, n.nombre as costo
             FROM recurso r 
             JOIN tipo t ON r.id_Tipo = t.id
+            JOIN nivel_de_subscripcion n ON r.id_Nivel_Subs = n.id
             WHERE r.id_Paso = ?
         ";
         $stmtResources = $pdo->prepare($queryResources);
@@ -56,51 +75,23 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             echo "<h3>Recursos Adicionales</h3>";
             echo "<ul>";
             foreach ($resources as $resource) {
-                echo "<li><a href='" . htmlspecialchars($resource['url']) . "' target='_blank'>" . htmlspecialchars($resource['titulo']) . " (" . htmlspecialchars($resource['tipo']) . ")</a></li>";
+                if ($userSub >= $resource['recursoCosto']) {
+                    echo "<li><a href='" . htmlspecialchars($resource['url']) . "' target='_blank'>" . htmlspecialchars($resource['titulo']) . " (" . htmlspecialchars($resource['tipo']) . ")</a></li>";
+                } else {
+                    echo "<li> <em> recurso para usaurios con el " . htmlspecialchars($resource['costo']) . " para arriba</em></li>";
+                }
             }
             echo "</ul>";
         }
 
-        // Mostrar el estado del paso y el dropdown para cambiar el estado
+        // Mostrar el estado del paso con enlaces a las páginas de creación y eliminación
         echo "<h3>Estado del paso</h3>";
-        echo "<form id='stepForm' method='POST'>";
-        echo "<label for='stepStatus'>Estado: </label>";
-        echo "<select name='stepStatus' id='stepStatus' onchange='this.form.submit()'>";
-        echo "<option value='incomplete'" . ($isCompleted == 'incomplete' ? " selected" : "") . ">Incompleto</option>";
-        echo "<option value='completed'" . ($isCompleted == 'completed' ? " selected" : "") . ">Completado</option>";
-        echo "</select>";
-        echo "</form>";
+        echo "<p>Estado actual: <strong>" . ($isCompleted == 'completed' ? 'Completado' : 'Incompleto') . "</strong></p>";
 
-        // Cambiar el estado del paso mediante una consulta al enviar el formulario
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['stepStatus'])) {
-            $newStatus = $_POST['stepStatus'];
-
-            if ($newStatus == 'completed') {
-                // Verificar si el paso ya ha sido completado por el usuario
-                $queryCheck = "SELECT * FROM usuario_paso WHERE id_Usuario = ? AND id_Paso = ?";
-                $stmtCheck = $pdo->prepare($queryCheck);
-                $stmtCheck->execute([$userId, $stepId]);
-
-                // Si no existe, realizar la inserción
-                if ($stmtCheck->rowCount() == 0) {
-                    $queryInsert = "INSERT INTO usuario_paso (id_Usuario, id_Paso) VALUES (?, ?)";
-                    $stmtInsert = $pdo->prepare($queryInsert);
-                    $stmtInsert->execute([$userId, $stepId]);
-                    echo "<p>Estado actualizado a 'Completado'.</p>";
-                } else {
-                    echo "<p>El paso ya ha sido marcado como completado.</p>";
-                }
-            } elseif ($newStatus == 'incomplete') {
-                // Eliminar el registro en la tabla usuario_paso si el paso es marcado como incompleto
-                $queryDelete = "DELETE FROM usuario_paso WHERE id_Usuario = ? AND id_Paso = ?";
-                $stmtDelete = $pdo->prepare($queryDelete);
-                $stmtDelete->execute([$userId, $stepId]);
-                echo "<p>Estado actualizado a 'Incompleto'.</p>";
-            }
-
-            // Recargar la página para reflejar el cambio de estado
-            header("Location: " . $_SERVER['REQUEST_URI']);
-            exit;
+        if ($isCompleted == 'incomplete') {
+            echo "<a href='crearPaso.php?id=" . urlencode($stepId) . "' class='btn-complete'>Marcar como Completado</a>";
+        } else {
+            echo "<a href='eliminarPaso.php?id=" . urlencode($stepId) . "' class='btn-incomplete'>Marcar como Incompleto</a>";
         }
     } catch (PDOException $e) {
         echo "<p>Error: " . htmlspecialchars($e->getMessage()) . "</p>";

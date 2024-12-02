@@ -57,13 +57,27 @@ try {
         }
 
         // Aquí procesarías el pago con PayPal (simulación o integración real)
+        // Simulamos un pago exitoso
         echo "<script>alert('¡Pago con PayPal procesado correctamente!');</script>";
 
-        // Redirigir a la página principal después de procesar el pago con PayPal
-        echo "<script>
-            window.location.href = 'index.php'; // Página de confirmación después del pago
-        </script>";
-        exit(); // Aseguramos que no continúe el procesamiento después de la redirección
+        // Actualizar el 'id_nivel_subs' del usuario en la base de datos
+        try {
+            $updateQuery = "UPDATE usuario SET id_nivel_subs = ? WHERE id = ?";
+            $updateStmt = $pdo->prepare($updateQuery);
+            $updateStmt->execute([$idProducto, $usuarioId]);
+
+            // Confirmación de la actualización
+            echo "<script>alert('¡Tu suscripción se ha actualizado exitosamente!');</script>";
+
+            // Redirigir a la página principal después de procesar el pago con PayPal
+            echo "<script>
+                window.location.href = 'index.php'; // Página de confirmación después del pago
+            </script>";
+            exit(); // Aseguramos que no continúe el procesamiento después de la redirección
+        } catch (PDOException $e) {
+            echo "<p>Error al actualizar la suscripción: " . htmlspecialchars($e->getMessage()) . "</p>";
+            die();
+        }
     }
 
 } catch (PDOException $e) {
