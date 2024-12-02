@@ -94,8 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="estado">Estado:</label>
         <select name="estado" required>
-            <option value="Activo">Activo</option>
-            <option value="Inactivo">Inactivo</option>
+            <option value="activo">activo</option>
+            <option value="inactivo">inactivo</option>
         </select><br>
 
         <input type="submit" value="Registrar Ruta">

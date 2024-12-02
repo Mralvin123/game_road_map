@@ -68,8 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <label for="estado">Estado:</label>
         <select name="estado" id="estado" required>
-            <option value="activo" <?php echo $nivel['estado'] === 'activo' ? 'selected' : ''; ?>>Activo</option>
-            <option value="inactivo" <?php echo $nivel['estado'] === 'inactivo' ? 'selected' : ''; ?>>Inactivo</option>
+            <option value="activo" <?php echo $nivel['estado'] === 'activo' ? 'selected' : ''; ?>>activo</option>
+            <option value="inactivo" <?php echo $nivel['estado'] === 'inactivo' ? 'selected' : ''; ?>>inactivo</option>
         </select>
 
         <!-- Agregar campo de descripción -->

@@ -84,8 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <label for="estado">Estado:</label>
         <select name="estado" id="estado" required>
-            <option value="activo" <?php echo $recurso['estado'] === 'activo' ? 'selected' : ''; ?>>Activo</option>
-            <option value="inactivo" <?php echo $recurso['estado'] === 'inactivo' ? 'selected' : ''; ?>>Inactivo</option>
+            <option value="activo" <?php echo $recurso['estado'] === 'activo' ? 'selected' : ''; ?>>activo</option>
+            <option value="inactivo" <?php echo $recurso['estado'] === 'inactivo' ? 'selected' : ''; ?>>inactivo</option>
         </select>
 
         <label for="id_Nivel_Subs">ID Nivel de Subscripción:</label>

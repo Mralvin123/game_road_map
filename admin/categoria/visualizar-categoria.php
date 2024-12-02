@@ -55,6 +55,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <link rel="stylesheet" href="../../stylesheet/Header.css">
     <link rel="stylesheet" href="../../stylesheet/Footer.css">
     <link rel="stylesheet" href="../../stylesheet/listausu.css">
+    <link rel="stylesheet" href="../../stylesheet/visualizar.css">
     <style>
         .estado-activo {
             color: green;
@@ -71,15 +72,20 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <?php include "../../includes/template/Header.php"; ?>
 
     <main>
-        <section>
-            <h2>Categoría: <?php echo htmlspecialchars($category['Titulo']); ?></h2>
-            <p><?php echo nl2br(htmlspecialchars($category['Descripcion'])); ?></p>
-            <p class="<?php echo $category['estado'] === 'activo' ? 'estado-activo' : 'estado-inactivo'; ?>">
-                Estado: <?php echo htmlspecialchars($category['estado']); ?>
-            </p>
-            <a href="eliminar.php?cod=<?php echo htmlspecialchars($categoryId); ?>" class='btn btn-danger'>ELIMINAR</a>
-            <a href="actualizar.php?cod=<?php echo htmlspecialchars($categoryId); ?>" class='btn btn-success'>MODIFICAR</a>
-        </section>
+    <section class="step-section">
+        <h2 class="step-title">Categoría: <?php echo htmlspecialchars($category['Titulo']); ?></h2>
+        <p class="step-description"><?php echo nl2br(htmlspecialchars($category['Descripcion'])); ?></p>
+        <p class="step-status <?php echo $category['estado'] === 'activo' ? 'estado-activo' : 'estado-inactivo'; ?>">
+            Estado: <?php echo htmlspecialchars($category['estado']); ?>
+        </p>
+        <div class="step-actions">
+            <a href="eliminar.php?cod=<?php echo htmlspecialchars($categoryId); ?>" class="btn btn-danger">ELIMINAR</a>
+            <a href="actualizar.php?cod=<?php echo htmlspecialchars($categoryId); ?>" class="btn btn-success">MODIFICAR</a>
+        </div>
+    </section>
+</main>
+
+
 
         <section>
             <h2>Rutas de Estudio</h2>

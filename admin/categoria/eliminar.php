@@ -1,5 +1,4 @@
 <?php
-include "../../includes/template/Header.php";
 include "../../includes/config/database.php";
 $db = conectarDB();
 
@@ -27,6 +26,4 @@ if ($resultado) {
             window.history.back(); // Regresa a la página anterior
           </script>";
 }
-
-include "../../includes/template/footer.php";
 ?>

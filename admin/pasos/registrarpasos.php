@@ -80,8 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['ajax']) && $_POST['aj
 
        <label for="estado">Estado:</label>
        <select name="estado" required>
-           <option value="activo" selected>Activo</option>
-           <option value="inactivo">Inactivo</option>
+           <option value="activo" selected>activo</option>
+           <option value="inactivo">inactivo</option>
        </select><br>
 
        <input type="submit" value="Registrar Paso">

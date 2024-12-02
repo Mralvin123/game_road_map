@@ -79,7 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="text" name="rol" id="rol" value="<?php echo $usuario['rol']; ?>" required>
 
         <label for="estado">Estado:</label>
-        <input type="text" name="estado" id="estado" value="<?php echo $usuario['estado']; ?>" required>
+        <!-- Usamos un <select> para elegir entre "Activo" e "Inactivo" -->
+        <select name="estado" id="estado" required>
+            <option value="activo" <?php echo ($usuario['estado'] == 'activo') ? 'selected' : ''; ?>>activo</option>
+            <option value="inactivo" <?php echo ($usuario['estado'] == 'inactivo') ? 'selected' : ''; ?>>inactivo</option>
+        </select><br>
 
         <label for="id_nivel_subs">Nivel de Suscripción:</label>
         <select name="id_nivel_subs" id="id_nivel_subs" required>
@@ -95,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <input type="submit" value="Actualizar Usuario" class="boton boton-verde">
     </form>
+    
     <?php include "../../includes/template/Footer.php";?>
 </body>
 </html>

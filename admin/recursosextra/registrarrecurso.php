@@ -74,8 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="estado">Estado:</label>
         <select name="estado" id="estado" required>
-            <option value="activo">Activo</option>
-            <option value="inactivo">Inactivo</option>
+            <option value="activo">activo</option>
+            <option value="inactivo">inactivo</option>
         </select><br>
 
         <label for="id_Nivel_Subs">ID Nivel de Subscripción:</label>

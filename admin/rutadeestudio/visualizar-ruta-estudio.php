@@ -64,15 +64,17 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <?php include "../../includes/template/Header.php"; ?>
 
     <main>
-    <section class="route-section">
-        <h2 class="route-title">Ruta de Estudio: <?php echo htmlspecialchars($route['titulo']); ?></h2>
-        <p class="route-description"><?php echo nl2br(htmlspecialchars($route['descripcion'])); ?></p>
-        <p class="route-category">Categoría: <?php echo htmlspecialchars($route['categoria']); ?></p>
-        <p class="route-status <?php echo ($route['estado'] === 'Activo' || $route['estado'] === 'activo') ? 'estado-activo' : 'estado-inactivo'; ?>">
+    <section class="step-section">
+        <h2 class="step-title">Ruta de Estudio: <?php echo htmlspecialchars($route['titulo']); ?></h2>
+        <p class="step-description"><?php echo nl2br(htmlspecialchars($route['descripcion'])); ?></p>
+        <p class="step-route">Categoría: <?php echo htmlspecialchars($route['categoria']); ?></p>
+        <p class="step-status <?php echo ($route['estado'] === 'Activo' || $route['estado'] === 'activo') ? 'estado-activo' : 'estado-inactivo'; ?>">
             Estado: <?php echo htmlspecialchars($route['estado']); ?>
         </p>
-        <a href="eliminar.php?cod=<?php echo htmlspecialchars($routeId); ?>" class="btn btn-danger">ELIMINAR</a>
-        <a href="actualizar.php?cod=<?php echo htmlspecialchars($routeId); ?>" class="btn btn-success">MODIFICAR</a>
+        <div class="step-actions">
+            <a href="eliminar.php?cod=<?php echo htmlspecialchars($routeId); ?>" class="btn btn-danger">ELIMINAR</a>
+            <a href="actualizar.php?cod=<?php echo htmlspecialchars($routeId); ?>" class="btn btn-success">MODIFICAR</a>
+        </div>
     </section>
 </main>
 

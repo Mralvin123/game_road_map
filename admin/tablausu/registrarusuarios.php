@@ -68,7 +68,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        <input type="text" name="rol" required><br>
 
        <label for="estado">Estado:</label>
-       <input type="text" name="estado" required><br>
+       <!-- Cambiar el campo estado por un <select> con opciones "Activo" e "Inactivo" -->
+       <select name="estado" required>
+           <option value="activo">activo</option>
+           <option value="inactivo">inactivo</option>
+       </select><br>
 
        <label for="id_nivel_subs">Nivel de Suscripción:</label>
        <select name="id_nivel_subs" required>

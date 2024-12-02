@@ -111,8 +111,8 @@ include "../../includes/template/Header.php";
 
         <label for="estado">Estado:</label>
         <select name="estado" id="estado" required>
-            <option value="activo" <?php echo $paso['estado'] === 'activo' ? 'selected' : ''; ?>>Activo</option>
-            <option value="inactivo" <?php echo $paso['estado'] === 'inactivo' ? 'selected' : ''; ?>>Inactivo</option>
+            <option value="activo" <?php echo $paso['estado'] === 'activo' ? 'selected' : ''; ?>>activo</option>
+            <option value="inactivo" <?php echo $paso['estado'] === 'inactivo' ? 'selected' : ''; ?>>inactivo</option>
         </select>
 
         <input type="submit" value="Actualizar Paso" class="boton boton-verde">

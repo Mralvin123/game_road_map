@@ -86,8 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <label for="estado">Estado:</label>
         <select name="estado" id="estado" required>
-            <option value="Activo" <?php echo $ruta['estado'] === 'Activo' ? 'selected' : ''; ?>>Activo</option>
-            <option value="Inactivo" <?php echo $ruta['estado'] === 'Inactivo' ? 'selected' : ''; ?>>Inactivo</option>
+            <option value="activo" <?php echo $ruta['estado'] === 'activo' ? 'selected' : ''; ?>>activo</option>
+            <option value="inactivo" <?php echo $ruta['estado'] === 'inactivo' ? 'selected' : ''; ?>>inactivo</option>
         </select>
 
         <input type="submit" value="Actualizar Ruta" class="boton boton-verde">

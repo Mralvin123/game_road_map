@@ -7,7 +7,7 @@
         $id = $_GET['cod'];
 
         // Consulta para actualizar el estado de la ruta a "Inactivo"
-        $query = "UPDATE ruta_de_estudio SET estado = 'Inactivo' WHERE id = ?";
+        $query = "UPDATE ruta_de_estudio SET estado = 'inactivo' WHERE id = ?";
 
         // Preparar la sentencia SQL
         if ($stmt = mysqli_prepare($db, $query)) {
@@ -18,7 +18,7 @@
             if (mysqli_stmt_execute($stmt)) {
                 // Si la ejecución es exitosa, redirigir a la lista
                 echo "<script>
-                        alert('La ruta de estudio ha sido marcada como \"Inactivo\" correctamente.');
+                        alert('La ruta de estudio ha sido marcada como \"inactivo\" correctamente.');
                         window.location.href = 'listarestudio.php';
                       </script>";
             } else {
