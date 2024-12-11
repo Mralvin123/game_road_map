@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Validar si se recibió el parámetro 'id'
+// Validar sdi se recibió el parámetro 'id'
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $stepId = htmlspecialchars($_GET['id']); // Escapar el valor para seguridad
     $userId = $_SESSION['user_id']; // ID del usuario logueado
